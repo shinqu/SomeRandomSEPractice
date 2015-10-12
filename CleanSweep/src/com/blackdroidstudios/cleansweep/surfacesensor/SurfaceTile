@@ -1,0 +1,64 @@
+package com.blackdroidstudios.cleansweep.surfacesensor;
+
+import java.awt.Color;
+import java.awt.Image;
+import com.blackdroidstudios.cleansweep.map.Tile;
+
+class SurfaceTile implements Tile{
+	private tileType _tiletype;
+	private floorType _floortype;
+	int _x;
+	int _y;
+	Tile[] _neighbors;
+	
+	SurfaceTile(tileType t, floorType f, int x, int y){
+		this._tiletype = t;
+		this._floortype = f;
+		this._x = x;
+		this._y = y;
+		this._neighbors = new Tile[4];
+	}
+	
+	public tileType getTileType() {return this._tiletype;}
+
+	public floorType getFloorType() {return this._floortype;}
+
+	public int getX() {return this._x;}
+
+	public int getY() {return this._y;}
+
+	public int getDirt() {return 0;}
+
+	public Image getSprite() {return null;}
+
+	public Color getColor() {return null;}
+
+	public Tile[] getNeighbours() {return _neighbors;}
+
+	/*
+	 * Tile[] intended to be [N,S,E,W]
+	 */
+	public void addNeighbour(Tile neighbor) {
+		int x = (this.getX() - neighbor.getX());
+		int y = (this.getY() - neighbor.getY());
+		if(x != 0){ //east and west cases
+			if(x < 0){
+				this._neighbors[2] = neighbor;
+			}
+			if(x > 0){
+				this._neighbors[3] = neighbor;
+			}
+		}//end east and west cases
+		
+		if(y != 0){//north and south cases
+			if(y < 0){
+				this._neighbors[0] = neighbor;
+			}
+			if(y > 0){
+				this._neighbors[1] = neighbor;
+			}
+		}//end north south cases 
+	}
+		
+		
+}
