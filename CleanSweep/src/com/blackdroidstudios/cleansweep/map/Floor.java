@@ -84,7 +84,7 @@ public class Floor implements Tile
 	}
 
 	@Override
-	public ArrayList<Tile> getNeighbours() 
+	public Tile[] getNeighbours() 
 	{
 		// TODO Auto-generated method stub
 		return null;
