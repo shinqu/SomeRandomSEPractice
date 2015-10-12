@@ -54,7 +54,7 @@ public interface Tile
 	/**
 	 * @return The Neighbour Tiles
 	 */
-	public ArrayList<Tile> getNeighbours();
+	public Tile[] getNeighbours();
 	/**
 	 * @param _neighbour Add a new Neighbour to the Tile
 	 *<p> Cannot hold more than 4 Neighbours, and if the are not adjacent to the Tile</p>
