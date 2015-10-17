@@ -23,7 +23,8 @@ import com.blackdroidstudios.cleansweep.map.FloorGenerator;
 import com.blackdroidstudios.cleansweep.map.FloorMap;
 import com.blackdroidstudios.cleansweep.map.Tile;
 
-public class GUIPanel extends JPanel {
+public class GUIPanel extends JPanel 
+{
 	Timer timer;
 
 	private Rectangle[][] floorMap;
@@ -33,7 +34,8 @@ public class GUIPanel extends JPanel {
 	int neighbourCnt = 0;
 	ArrayList<Tile> currentTileneighbours = new ArrayList<>();
 
-	public GUIPanel() {
+	public GUIPanel() 
+	{
 		floorMap = new Rectangle[FloorMap.FLOOR_SIZE_X][FloorMap.FLOOR_SIZE_Y];
 		actor.setX(10);
 		actor.setY(10);

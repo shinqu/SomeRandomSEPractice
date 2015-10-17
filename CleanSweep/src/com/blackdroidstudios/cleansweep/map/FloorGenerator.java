@@ -26,7 +26,7 @@ public class FloorGenerator
 				y = y + 130;
 				
 			for(int j = 0; j < FloorMap.FLOOR_SIZE_Y; j++){
-				tileCollection[i][j] = new Floor(x, y, Tile.floorType.Plain, Tile.tileType.Passable, Color.GREEN, null, 4);
+				tileCollection[i][j] = new Floor(x, y, Tile.floorType.Plain, Color.GREEN, 4);
 				x = x + 130;
 				changeY = true;
 			}

@@ -8,13 +8,13 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 
-public class Wall implements Tile 
+public class Obstacle implements Tile 
 {
 	//Variables
 	private int x;
 	private int y;
 	
-	public Wall(int _x, int _y)
+	public Obstacle(int _x, int _y)
 	{
 		//Wall is impassable by default
 		

@@ -38,19 +38,18 @@ public class Floor implements Tile
 		this.x = x;
 		this.y = y;
 		this.myFloorType = floorType;
+		this.myTileType = tileType.Passable;
 	}
-	
-	public Floor(int x, int y, floorType floorType, tileType tileType, Color color, Image sprite, int dirt)
+	public Floor(int x, int y, floorType floorType, Color color, int dirt)
 	{
 		//Auto generated, no need to reference from constructor
 		this.x = x;
 		this.y = y;
 		this.myFloorType = floorType;
-		this.myTileType = tileType;
+		this.myTileType = tileType.Passable;
 		this.color = color;
-		this.sprite = sprite;
 		this.dirt = dirt;
-		this.neighbours = new ArrayList<>();
+		this.neighbours = new ArrayList<Tile>();
 	}
 	
 	@Override
@@ -138,7 +137,18 @@ public class Floor implements Tile
 	@Override
 	public Tile getEast() {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getX() > this.x)
+			{
+				return _floor;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Tile getNorth() {
 		for(Tile _floor : neighbours)
 		{
 			if(_floor.getY() > this.y)
@@ -146,14 +156,6 @@ public class Floor implements Tile
 				return _floor;
 			}
 		}
-=======
->>>>>>> 142bc39e0c94e50f544f4017ba0f5ef358220c82
-		return null;
-	}
-
-	@Override
-	public Tile getNorth() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
