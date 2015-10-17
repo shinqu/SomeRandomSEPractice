@@ -5,7 +5,6 @@ import com.blackdroidstudios.cleansweep.map.Tile.floorType;
 import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 import com.blackdroidstudios.cleansweep.*;
 import com.blackdroidstudios.cleansweep.gui.*;
-import com.blackdroidstudios.cleansweep.main.*;
 import com.blackdroidstudios.cleansweep.map.*;
 import com.blackdroidstudios.cleansweep.movementsensor.*;
 import com.blackdroidstudios.cleansweep.surfacesensor.*;
