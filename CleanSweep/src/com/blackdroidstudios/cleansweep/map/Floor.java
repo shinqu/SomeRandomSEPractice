@@ -77,7 +77,7 @@ public class Floor implements Tile
 	public Image getSprite() 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 
 	@Override
@@ -105,7 +105,13 @@ public class Floor implements Tile
 	public Tile getNorth() 
 	{
 		// TODO Auto-generated method stub
-		
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getY() > this.y)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 
