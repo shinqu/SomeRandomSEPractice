@@ -1,5 +1,9 @@
 package com.blackdroidstudios.cleansweep.gui;
 
+/**
+ * @author Armando Garcin
+ */
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -42,8 +46,11 @@ public class GUIPanel extends JPanel
 		repaint();
 	}
 	
-	Action paintTimer = new AbstractAction() { // functionality of our timer:
-		public void actionPerformed(ActionEvent e) {
+	Action paintTimer = new AbstractAction()
+	{ 
+		// functionality of our timer:
+		public void actionPerformed(ActionEvent e) 
+		{
 			// set X and Y co-ordinates that will then be fetched when drawing
 			// the ball Image on the JPanel.
 			currentBall.setX(currentBall.getX() + 5);

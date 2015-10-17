@@ -8,7 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-public class MainPanel {
+public class MainPanel 
+{
 //	Image ballImage; // Reserve memory for Image ballImage;
 //	Ball currentBall = new Ball(); // instantiate our ball class
 //
