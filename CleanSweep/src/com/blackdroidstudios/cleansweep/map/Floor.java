@@ -13,14 +13,15 @@ public class Floor implements Tile
 {
 
 	//Variables
-	private ArrayList<Tile> neighbours;
-	private tileType myTileType;
-	private floorType myFloorType;
-	private Color color;
-	private Image sprite;
 	private int x;
 	private int y;
+	private floorType myFloorType;
+	private tileType myTileType;
+	private Color color;
+	private Image sprite;
 	private int dirt;
+	private boolean IsVisited;
+	private ArrayList<Tile> neighbours;
 	
 	//Custom Constructor
 	/**
@@ -30,16 +31,18 @@ public class Floor implements Tile
 	 * @param _floorType The type of floor. <p>Use "Tile.floorType" to search the 4 options: Plain, LowCarpet, HighCarper, and ChargingStation!</p>
 	 * <p>E.G. Tile.floorType.Plain</p>
 	 * 
-	 * @Note 
-	 * TileType will always be Passable, since this is a floor tile. 
 	 */
-	public Floor(int _x, int _y, floorType _floorType)
+	public Floor(int x, int y, floorType floorType, tileType tileType, Color color, Image sprite, int dirt)
 	{
 		//Auto generated, no need to reference from constructor
-		myTileType = tileType.Passable;
-		x = _x;
-		y = _y;
-		myFloorType = _floorType;
+		this.x = x;
+		this.y = y;
+		this.myFloorType = floorType;
+		this.myTileType = tileType;
+		this.color = color;
+		this.sprite = sprite;
+		this.dirt = dirt;
+		this.neighbours = new ArrayList<>();
 	}
 	
 	@Override
@@ -51,7 +54,7 @@ public class Floor implements Tile
 	@Override
 	public floorType getFloorType() 
 	{
-		return myFloorType;
+		return null;
 	}
 
 	@Override
@@ -59,11 +62,23 @@ public class Floor implements Tile
 	{
 		return x;
 	}
+	
+	@Override
+	public void setX(int x) 
+	{
+		this.x = x;
+	}
 
 	@Override
 	public int getY() 
 	{
 		return y;
+	}
+	
+	@Override
+	public void setY(int y) 
+	{
+		this.y = y;
 	}
 
 	@Override
@@ -86,48 +101,30 @@ public class Floor implements Tile
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public boolean getIsVisited()
+	{
+		return this.IsVisited;
+	}
 
 	@Override
 	public ArrayList<Tile> getNeighbours() 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return neighbours;
 	}
 
 	@Override
-	public void addNeighbour(Tile _neighbour)
+	public void addNeighbour(Tile neighbour)
 	{
 		// TODO Auto-generated method stub
-		
+		this.neighbours.add(neighbour);
 	}
-
+	
 	@Override
-	public Tile getNorth() 
+	public void setIsVisited(boolean isVisited)
 	{
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
-
-	@Override
-	public Tile getSouth() 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tile getEast() 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tile getWest() 
-	{
-		// TODO Auto-generated method stub
-		return null;
+		this.IsVisited = isVisited;
 	}
 	
 }
