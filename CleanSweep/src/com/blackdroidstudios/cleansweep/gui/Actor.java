@@ -4,6 +4,9 @@ public class Actor {
 	/*
 	 * Simple Object class to store the ball's co-ordinates.
 	 */
+	
+	private static Actor instance = null;
+	
 	private int x;
 	private int y;
 	private int z;
@@ -34,5 +37,14 @@ public class Actor {
 
 	public void setY(int y2) {
 		y = y2;
+	}
+	
+	public static Actor getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new Actor();
+		}
+		return instance;
 	}
 }
