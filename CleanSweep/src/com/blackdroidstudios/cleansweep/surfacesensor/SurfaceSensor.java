@@ -1,5 +1,11 @@
 package com.blackdroidstudios.cleansweep.surfacesensor;
 
+/**
+ * @author Steven Kiley
+ */
+
+import com.blackdroidstudios.cleansweep.map.Tile;
+
 public interface SurfaceSensor {
 	int getCurrent();
 	int getPrevious();
@@ -9,6 +15,6 @@ public interface SurfaceSensor {
 	int getWest();
 	
 	void registerMove(int x, int y);
-	void setCurrent(SurfaceTile s);
-	void setNeighbor(SurfaceTile s);
+	void setCurrent(Tile s);
+	void setNeighbor(Tile s);
 }

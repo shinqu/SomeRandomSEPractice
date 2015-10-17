@@ -54,10 +54,22 @@ public interface Tile
 	/**
 	 * @return The Neighbour Tiles
 	 */
-	public Tile[] getNeighbours();
+	public ArrayList<Tile> getNeighbours();
 	/**
 	 * @param _neighbour Add a new Neighbour to the Tile
 	 *<p> Cannot hold more than 4 Neighbours, and if the are not adjacent to the Tile</p>
 	 */
 	public void addNeighbour(Tile _neighbour);
+	
+	void setX(int x);
+	
+	void setY(int y);
+	
+	void setIsVisited(boolean isVisited);
+	
+	public boolean getIsVisited();
+	public Tile getEast();
+	public Tile getNorth();
+	public Tile getSouth();
+	public Tile getWest();
 }
