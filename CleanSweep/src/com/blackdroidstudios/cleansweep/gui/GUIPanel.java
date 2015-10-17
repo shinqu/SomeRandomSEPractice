@@ -165,12 +165,16 @@ public class GUIPanel extends JPanel
 	// }
 
 	public void paintMap(Graphics2D _g2d) throws IOException {
-		for (int x = 0; x < FloorMap.FLOOR_SIZE_X; x++) {
-			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) {
-				if ((x + y) % 2 == 0) {
+		for (int x = 0; x < FloorMap.FLOOR_SIZE_X; x++) 
+		{
+			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) 
+			{
+				if ((x + y) % 2 == 0) 
+				{
 					_g2d.setColor(Color.GREEN);
 					_g2d.fillRect(x * 125, y * 125, 125, 125);
-				} else {
+				} else 
+				{
 					_g2d.setColor(Color.WHITE);
 					_g2d.fillRect(x * 125, y * 125, 125, 125);
 				}

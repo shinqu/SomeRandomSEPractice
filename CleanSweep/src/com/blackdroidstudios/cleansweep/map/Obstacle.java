@@ -13,15 +13,18 @@ public class Obstacle implements Tile
 	//Variables
 	private int x;
 	private int y;
+	private tileType myTileType;
+	//private floorType 
 	
 	public Obstacle(int _x, int _y)
 	{
-		//Wall is impassable by default
+		//Obstacle is impassable by default
 		
 	}
 
 	@Override
-	public tileType getTileType() {
+	public tileType getTileType() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

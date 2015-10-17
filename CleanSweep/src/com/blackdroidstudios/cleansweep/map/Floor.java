@@ -61,7 +61,7 @@ public class Floor implements Tile
 	@Override
 	public floorType getFloorType() 
 	{
-		return null;
+		return myFloorType;
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class Floor implements Tile
 	public Color getColor() 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return color;
 	}
 	
 	public boolean getIsVisited()
