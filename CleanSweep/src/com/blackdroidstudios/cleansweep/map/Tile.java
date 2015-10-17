@@ -60,20 +60,16 @@ public interface Tile
 	 *<p> Cannot hold more than 4 Neighbours, and if the are not adjacent to the Tile</p>
 	 */
 	public void addNeighbour(Tile _neighbour);
-	/**
-	 * @return The Tile above the current one. (Null if unavailable)
-	 */
-	public Tile getNorth();
-	/**
-	 * @return The Tile below the current one. (Null if unavailable)
-	 */
-	public Tile getSouth();
-	/**
-	 * @return The Tile to the right of the current one. (Null if unavailable)
-	 */
+	
+	void setX(int x);
+	
+	void setY(int y);
+	
+	void setIsVisited(boolean isVisited);
+	
+	public boolean getIsVisited();
 	public Tile getEast();
-	/**
-	 * @return The Tile to the left of the current one. (Null if unavailable)
-	 */
+	public Tile getNorth();
+	public Tile getSouth();
 	public Tile getWest();
 }
