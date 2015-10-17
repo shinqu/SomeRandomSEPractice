@@ -32,6 +32,14 @@ public class Floor implements Tile
 	 * <p>E.G. Tile.floorType.Plain</p>
 	 * 
 	 */
+	public Floor(int x, int y, floorType floorType)
+	{
+		//Auto generated, no need to reference from constructor
+		this.x = x;
+		this.y = y;
+		this.myFloorType = floorType;
+	}
+	
 	public Floor(int x, int y, floorType floorType, tileType tileType, Color color, Image sprite, int dirt)
 	{
 		//Auto generated, no need to reference from constructor
@@ -125,6 +133,30 @@ public class Floor implements Tile
 	public void setIsVisited(boolean isVisited)
 	{
 		this.IsVisited = isVisited;
+	}
+
+	@Override
+	public Tile getEast() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Tile getNorth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Tile getSouth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Tile getWest() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

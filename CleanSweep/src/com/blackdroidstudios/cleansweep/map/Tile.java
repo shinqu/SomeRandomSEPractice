@@ -68,4 +68,8 @@ public interface Tile
 	void setIsVisited(boolean isVisited);
 	
 	public boolean getIsVisited();
+	public Tile getEast();
+	public Tile getNorth();
+	public Tile getSouth();
+	public Tile getWest();
 }

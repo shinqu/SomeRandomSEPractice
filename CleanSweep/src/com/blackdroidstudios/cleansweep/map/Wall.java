@@ -98,4 +98,28 @@ public class Wall implements Tile
 		return null;
 	}
 
+	@Override
+	public void setX(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setIsVisited(boolean isVisited) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsVisited() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
