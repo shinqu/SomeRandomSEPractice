@@ -16,7 +16,7 @@ public class SurfaceSensorFactory
 		{
 			throw new Exception();
 		}
-		Tile st = new Floor(t.getX(), t.getY(), t.getFloorType());
+		Tile st = new Floor(t.getX(), t.getY(), t.getFloorType(), t.getColor(), t.getDirt());
 		Sensor sensor = new Sensor(st);
 		return sensor;
 	}

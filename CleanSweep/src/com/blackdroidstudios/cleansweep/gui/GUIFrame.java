@@ -41,7 +41,6 @@ public class GUIFrame
 		});
 		
 		frame.setResizable(false);
-		
 		//Show the Frame
 		frame.setVisible(true);
 	}

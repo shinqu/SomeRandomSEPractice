@@ -13,33 +13,29 @@ public class Floor implements Tile
 {
 
 	//Variables
+	private ArrayList<Tile> neighbours;
+	private Image sprite;
+	private Color color;
 	private int x;
 	private int y;
+	private int dirt;
 	private floorType myFloorType;
 	private tileType myTileType;
-	private Color color;
-	private Image sprite;
-	private int dirt;
 	private boolean IsVisited;
-	private ArrayList<Tile> neighbours;
+	
 	
 	//Custom Constructor
 	/**
 	 * @author Armando Garcin
 	 * @param _x The X coordinate in the map
 	 * @param _y the Y coordinate in the map
-	 * @param _floorType The type of floor. <p>Use "Tile.floorType" to search the 4 options: Plain, LowCarpet, HighCarper, and ChargingStation!</p>
-	 * <p>E.G. Tile.floorType.Plain</p>
+	 * @param _floorType The type of floor. 
+	 * @param color Color of the Floor
+	 * @param dirt Number of dirt to be added
 	 * 
+	 * <p>Use "Tile.floorType" to search the 4 options: Plain, LowCarpet, HighCarper, and ChargingStation!</p>
+	 * <p>E.G. Tile.floorType.Plain</p>
 	 */
-	public Floor(int x, int y, floorType floorType)
-	{
-		//Auto generated, no need to reference from constructor
-		this.x = x;
-		this.y = y;
-		this.myFloorType = floorType;
-		this.myTileType = tileType.Passable;
-	}
 	public Floor(int x, int y, floorType floorType, Color color, int dirt)
 	{
 		//Auto generated, no need to reference from constructor
@@ -69,23 +65,11 @@ public class Floor implements Tile
 	{
 		return x;
 	}
-	
-	@Override
-	public void setX(int x) 
-	{
-		this.x = x;
-	}
 
 	@Override
 	public int getY() 
 	{
 		return y;
-	}
-	
-	@Override
-	public void setY(int y) 
-	{
-		this.y = y;
 	}
 
 	@Override
@@ -127,15 +111,10 @@ public class Floor implements Tile
 		// TODO Auto-generated method stub
 		this.neighbours.add(neighbour);
 	}
-	
-	@Override
-	public void setIsVisited(boolean isVisited)
-	{
-		this.IsVisited = isVisited;
-	}
 
 	@Override
-	public Tile getEast() {
+	public Tile getEast() 
+	{
 		// TODO Auto-generated method stub
 		for(Tile _floor : neighbours)
 		{
@@ -148,7 +127,8 @@ public class Floor implements Tile
 	}
 
 	@Override
-	public Tile getNorth() {
+	public Tile getNorth() 
+	{
 		for(Tile _floor : neighbours)
 		{
 			if(_floor.getY() > this.y)
@@ -160,14 +140,28 @@ public class Floor implements Tile
 	}
 
 	@Override
-	public Tile getSouth() {
-		// TODO Auto-generated method stub
+	public Tile getSouth() 
+	{
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getY() < this.y)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Tile getWest() {
-		// TODO Auto-generated method stub
+	public Tile getWest() 
+	{
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getX() < this.x)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 	
