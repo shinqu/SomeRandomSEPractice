@@ -3,6 +3,7 @@ package com.blackdroidstudios.cleansweep.movementsensor;
 import java.util.ArrayList;
 
 import com.blackdroidstudios.cleansweep.map.Tile;
+import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 
 /**
  * @Author Armando Garcin
@@ -20,6 +21,7 @@ public class MovementControl
 	public MovementControl()
 	{
 		map = new MovementMap();
+		path = new ArrayList<Tile>();
 		currentTile = null;
 	}
 	
@@ -32,7 +34,30 @@ public class MovementControl
 	{
 		if(path.isEmpty())
 		{
+			Tile newTarget = null;
 			
+			System.out.println("Creating new path");
+			//Check any open neighbours
+			for(Tile _tile : currentTile.getNeighbours())
+			{
+				if(!map.getVisitedTiles().contains(_tile) && _tile.getTileType() == tileType.Passable)
+				{
+					newTarget = _tile;
+					break;
+				}
+			}
+			
+			//Did we find a free and open tile to move?
+			if(newTarget != null)
+			{
+				path = map.findPath(currentTile, newTarget);
+			}
+		}else
+		{
+			//Move it!!
+			System.out.println("Moving");
+			currentTile = path.get(0);
+			path.remove(0);
 		}
 	}
 	
@@ -44,5 +69,12 @@ public class MovementControl
 	{
 		currentTile = _tile;
 		map.registerTile(_tile);
+	}
+	/**
+	 * @return Return the path to be traveled
+	 */
+	public ArrayList<Tile> getPath()
+	{
+		return path;
 	}
 }

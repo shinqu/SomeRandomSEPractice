@@ -1,9 +1,11 @@
 package com.blackdroidstudios.cleansweep.movementsensor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.blackdroidstudios.cleansweep.map.Tile;
 import com.blackdroidstudios.cleansweep.map.Tile.floorType;
+import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 
 /**
  * 
@@ -97,6 +99,7 @@ public class MovementMap
 	{
 		ArrayList<Tile> openList = new ArrayList<Tile>();
 		ArrayList<Tile> closedList = new ArrayList<Tile>();
+		ArrayList<Tile> finalPath = new ArrayList<Tile>();
 		
 		Tile currentTile = null;
 		
@@ -107,21 +110,54 @@ public class MovementMap
 		//Let's find a path!
 		while(!openList.isEmpty())
 		{
+			Tile selectedTile = null;
+			
+			//Step 1
 			//Get the lowest cost (and open) tile from Open List
 			for(Tile _t : openList)
 			{
-				
+				if(selectedTile != null)
+				{
+					if(getFCost(_t, _startingTile, _goalTile) < getFCost(_t, _startingTile, _goalTile))
+					{
+						selectedTile = _t;
+					}
+				}else
+				{
+					selectedTile = _t;
+				}
 			}
 			
-			break;
+			//Step 2
+			//Check if the selected tile is the goal!
+			if(selectedTile == _goalTile)
+			{
+				finalPath = reconstructPath(closedList, _startingTile, _goalTile);
+				break;
+			}
+			
+			//Step 3
+			//Update the closed and open lists
+			openList.remove(selectedTile);
+			closedList.add(selectedTile);
+			
+			//Step 4
+			//Add all available neighbours to the OpenList
+			for(Tile _t : selectedTile.getNeighbours())
+			{
+				if(!closedList.contains(_t) && _t.getTileType() == tileType.Passable)
+				{
+					openList.add(_t);
+				}
+			}
+					
 		}
 		
-		return null;
+		return finalPath;
 	}
 	public ArrayList<Tile> findPath(Tile _currentTile)
 	{	
 		Tile newTargetTile = null;
-		
 		
 		return null;
 	}
@@ -133,8 +169,39 @@ public class MovementMap
 	 */
 	private ArrayList<Tile> reconstructPath(ArrayList<Tile> _foundPath, Tile _start, Tile _goal)
 	{
+		ArrayList<Tile> finalPath = new ArrayList<Tile>();
 		
-		return null;
+		//If the closed List is empty, just return a simple list
+		if(!_foundPath.isEmpty())
+		{
+			finalPath.add(_goal);
+			
+		}else
+		{
+			finalPath.add(_start);
+		}
+		
+		//Reverse the List
+		Collections.reverse(finalPath);
+		
+		return finalPath;
 	}
+	
+	private int getFCost(Tile _current, Tile _start, Tile _goal)
+	{
+		return getGCost(_current, _start) + getHCost(_current, _goal);
+	}
+	
+	private int getGCost(Tile _current, Tile _start)
+	{
+		return(Math.abs(_current.getX() - _start.getX()) + Math.abs(_current.getY() - _start.getY()));
+	}
+	
+	private int getHCost(Tile _current, Tile _goal)
+	{
+		return (Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY()));
+	}
+	
+	
 	
 }
