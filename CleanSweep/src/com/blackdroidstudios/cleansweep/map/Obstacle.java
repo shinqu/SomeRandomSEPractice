@@ -8,40 +8,47 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 
-public class Wall implements Tile 
+public class Obstacle implements Tile 
 {
 	//Variables
+	private ArrayList<Tile> neighbours;
+	private Image sprite;
+	private Color color;
 	private int x;
 	private int y;
-	
-	public Wall(int _x, int _y)
+	private tileType myTileType;
+
+	//Argument Constructor
+	public Obstacle(int _x, int _y, Image _sprite)
 	{
-		//Wall is impassable by default
 		
 	}
 
 	@Override
-	public tileType getTileType() {
-		// TODO Auto-generated method stub
+	public tileType getTileType() 
+	{
+		return myTileType;
+	}
+
+	@Override
+	public floorType getFloorType() 
+	{
+		// You cannot pass an Obstacle (unless you're a ghost).
 		return null;
 	}
 
 	@Override
-	public floorType getFloorType() {
-		// You cannot pass a wall (unless you're a ghost), 
-		return null;
+	public int getX() 
+	{
+		// TODO Auto-generated method stub
+		return x;
 	}
 
 	@Override
-	public int getX() {
+	public int getY()
+	{
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	@Override
@@ -75,51 +82,53 @@ public class Wall implements Tile
 	}
 
 	@Override
-	public Tile getNorth() {
+	public Tile getEast() {
 		// TODO Auto-generated method stub
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getX() > this.x)
+			{
+				return _floor;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Tile getNorth() {
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getY() > this.y)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public Tile getSouth() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tile getEast() {
-		// TODO Auto-generated method stub
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getY() < this.y)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public Tile getWest() {
-		// TODO Auto-generated method stub
+		for(Tile _floor : neighbours)
+		{
+			if(_floor.getX() < this.x)
+			{
+				return _floor;
+			}
+		}
 		return null;
 	}
 
-	@Override
-	public void setX(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setIsVisited(boolean isVisited) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean getIsVisited() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

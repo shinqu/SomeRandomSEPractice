@@ -23,4 +23,12 @@ public class GUIControl
 		frame.addPanel(panel);
 	}
 	
+	/**
+	 * To be coded later...
+	 */
+	public void addMap()
+	{
+		
+	}
+	
 }

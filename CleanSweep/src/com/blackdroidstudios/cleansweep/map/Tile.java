@@ -61,13 +61,6 @@ public interface Tile
 	 */
 	public void addNeighbour(Tile _neighbour);
 	
-	void setX(int x);
-	
-	void setY(int y);
-	
-	void setIsVisited(boolean isVisited);
-	
-	public boolean getIsVisited();
 	public Tile getEast();
 	public Tile getNorth();
 	public Tile getSouth();
