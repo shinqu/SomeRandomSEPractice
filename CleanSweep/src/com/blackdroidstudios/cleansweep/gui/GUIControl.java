@@ -1,10 +1,17 @@
 package com.blackdroidstudios.cleansweep.gui;
 
+import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
 public class GUIControl 
 {
 	//Variables
-	GUIFrame frame;
-	GUIPanel panel;
+	private GUIFrame frame;
+	private JPanel panelContainer;
+	private GUIPanel guiPanel;
+	private GUIConsole consolePanel;
 	
 	public GUIControl()
 	{
@@ -15,12 +22,21 @@ public class GUIControl
 	public void initializeGUI()
 	{
 		frame = new GUIFrame();
-		panel = new GUIPanel();
+		panelContainer = new JPanel();
+		guiPanel = new GUIPanel();
+		consolePanel = new GUIConsole();
 		
-		panel.initializePanel();
+		guiPanel.setPreferredSize(new Dimension(GUIFrame.FRAME_SIZE_X, GUIFrame.GUIPANEL_SIZE_Y));
+		consolePanel.setPreferredSize(new Dimension(GUIFrame.FRAME_SIZE_X, GUIFrame.CONSOLELOG_SIZE_Y));
+		
+		//Set the layout of the container
+		panelContainer.setLayout(new BoxLayout(panelContainer, BoxLayout.Y_AXIS));
+		
+		panelContainer.add(guiPanel);
+		panelContainer.add(consolePanel);
 		
 		//Add the Panel to the Frame
-		frame.addPanel(panel);
+		frame.addPanel(panelContainer);
 	}
 	
 	/**
@@ -29,6 +45,16 @@ public class GUIControl
 	public void addMap()
 	{
 		
+	}
+	
+	public int getFrameSizeX()
+	{
+		return frame.FRAME_SIZE_X;
+	}
+	
+	public int getFrameSizeY()
+	{
+		return frame.FRAME_SIZE_Y;
 	}
 	
 }

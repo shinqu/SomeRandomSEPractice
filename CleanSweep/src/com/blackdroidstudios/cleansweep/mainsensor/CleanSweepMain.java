@@ -1,5 +1,6 @@
 package com.blackdroidstudios.cleansweep.mainsensor;
 
+import com.blackdroidstudios.cleansweep.gui.GUIControl;
 import com.blackdroidstudios.cleansweep.movementsensor.MovementControl;
 
 /**
@@ -13,11 +14,13 @@ public class CleanSweepMain
 {
 	//Variables
 	private MovementControl movementSensor;
+	private GUIControl guiControl;
 	
 	//Constructor
 	public CleanSweepMain()
 	{
 		movementSensor = new MovementControl();
+		guiControl = new GUIControl();
 	}
 	
 	

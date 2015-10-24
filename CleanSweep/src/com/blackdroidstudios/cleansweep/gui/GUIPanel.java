@@ -29,34 +29,28 @@ public class GUIPanel extends JPanel
 	//Static variables
 	private static final int TILE_SIZE = 75; //This will be the size of the Tile
 	
-	
-	Timer timer;
-
+	//Variables
+	private Timer timer;
 	private Rectangle[][] floorMap;
-	FloorGenerator floorGenerator;
-	Actor actor = new Actor();
-	Tile currentTile;
-	int neighbourCnt = 0;
-	ArrayList<Tile> currentTileneighbours = new ArrayList<>();
+	private ArrayList<Tile> visitedTiles;
 
 	public GUIPanel() 
 	{
 		floorMap = new Rectangle[FloorMap.FLOOR_SIZE_X][FloorMap.FLOOR_SIZE_Y];
-		actor.setX(10);
-		actor.setY(10);
-		//currentTile = floorGenerator.tileCollection[0][0];
-		floorGenerator = new FloorGenerator();
-
-		timer = new Timer(1000, paintTimer);
-		timer.start();
+		visitedTiles = new ArrayList<Tile>();
 	}
 
-	public void initializePanel() {
+	/**
+	 *<p> Refreshes the panel.</p>
+	 *<p>If you just updated something in the panel, it's a good idea to use this! :)</p>
+	 */
+	public void refreshScreen() 
+	{
 		validate();
 		repaint();
 	}
 
-	Action paintTimer = new AbstractAction() { // functionality of our timer:
+	/*Action paintTimer = new AbstractAction() { // functionality of our timer:
 		public void actionPerformed(ActionEvent e) {
 			// if(pi < FloorMap.FLOOR_SIZE_X && pj < FloorMap.FLOOR_SIZE_Y){
 			if (CheckIfAllTilesVisited() == false) 
@@ -68,97 +62,8 @@ public class GUIPanel extends JPanel
 				timer.stop();
 			}
 		}
-	};
+	};*/
 
-	/*public boolean Move() 
-	{
-		if(currentTile == null)
-		{
-			//currentTile = floorGenerator.tileCollection[0][0];
-			SetIsVisited(currentTile);
-		}
-		
-		currentTileneighbours = currentTile.getNeighbours();
-
-		if (neighbourCnt < currentTileneighbours.size()) {
-			Tile neighbour = currentTile.getNeighbours().get(neighbourCnt);
-
-			if (neighbour.getIsVisited() == true)
-				neighbourCnt++;
-			else {
-				actor.setX(neighbour.getX());
-				actor.setY(neighbour.getY());
-				currentTile = neighbour;
-				SetIsVisited(currentTile);
-				neighbourCnt = 0;
-			}
-		}
-		return true;
-	}*/
-	
-	public boolean SetIsVisited(Tile tile) 
-	{
-		for (int i = 0; i < FloorMap.FLOOR_SIZE_X; i++) 
-		{
-			for (int j = 0; j < FloorMap.FLOOR_SIZE_Y; j++) 
-			{
-				/*if (floorGenerator.tileCollection[i][j] == tile) 
-				{
-					floorGenerator.tileCollection[i][j].setIsVisited(true);
-					return true;
-				}*/
-			}
-		}
-		return true;
-	}
-
-	public boolean CheckIfAllTilesVisited() {
-		boolean visited = true;
-		for (int i = 0; i < FloorMap.FLOOR_SIZE_X; i++) {
-			for (int j = 0; j < FloorMap.FLOOR_SIZE_Y; j++) {
-				/*if (floorGenerator.tileCollection[i][j].getIsVisited() == false) {
-					visited = false;
-					return visited;
-				}*/
-			}
-		}
-		return visited;
-	}
-
-	public void paintMap(Graphics2D _g2d) throws IOException 
-	{
-		for (int x = 0; x < FloorMap.FLOOR_SIZE_X; x++) 
-		{
-			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) 
-			{
-				if ((x + y) % 2 == 0) 
-				{
-					_g2d.setColor(Color.GREEN);
-					_g2d.fillRect(x * 125, y * 125, 125, 125);
-				} else 
-				{
-					_g2d.setColor(Color.WHITE);
-					_g2d.fillRect(x * 125, y * 125, 125, 125);
-				}
-			}
-		}
-
-		BufferedImage myPicture = ImageIO.read(getClass().getResource("/resources/images/smallCleanSweep.jpg"));
-		// ImageIO.read(new File("/Test/Content/Images/CleanSweep.jpg"));
-		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-		add(picLabel);
-
-		_g2d.drawImage(myPicture, actor.getX(), actor.getY(), Color.BLACK, null);
-		_g2d.dispose();
-	}
-
-	public void addActor(Graphics gd) throws IOException 
-	{
-		// Do stuff
-
-		validate();
-		repaint();
-	}
 
 	// REALLY IMPORTANT!!!!! O.o
 	// Paint function
@@ -167,7 +72,7 @@ public class GUIPanel extends JPanel
 		Graphics2D g2d = (Graphics2D) gd;
 		
 		//Clear all the screen before painting anything!
-		g2d.clearRect(0, 0, GUIFrame.FRAME_SIZE_X, GUIFrame.FRAME_SIZE_Y);
+		g2d.clearRect(0, 0, GUIFrame.FRAME_SIZE_X, GUIFrame.GUIPANEL_SIZE_Y);
 		
 		// Paint map
 		try 
@@ -177,6 +82,25 @@ public class GUIPanel extends JPanel
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void paintMap(Graphics2D _g2d) throws IOException 
+	{
+		for (int x = 0; x < FloorMap.FLOOR_SIZE_X; x++) 
+		{
+			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) 
+			{
+				if ((x + y) % 2 == 0) 
+				{
+					_g2d.setColor(Color.BLACK);
+					_g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+				} else 
+				{
+					_g2d.setColor(Color.WHITE);
+					_g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+				}
+			}
 		}
 	}
 }
