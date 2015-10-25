@@ -19,10 +19,10 @@ import javax.swing.JPanel;
 public class GUIFrame 
 {
 	//Static Variables
-	public static final int FRAME_SIZE_X = 1600;
-	public static final int FRAME_SIZE_Y = 1200;
-	public static final int GUIPANEL_SIZE_Y = 900;
-	public static final int CONSOLELOG_SIZE_Y = 300;
+	public static final int FRAME_SIZE_X = 1400;
+	public static final int FRAME_SIZE_Y = 800;
+	public static final int GUIPANEL_SIZE_X = 1000;
+	public static final int CONSOLELOG_SIZE_X = 400;
 	
 	//Variables
 	private JFrame frame;

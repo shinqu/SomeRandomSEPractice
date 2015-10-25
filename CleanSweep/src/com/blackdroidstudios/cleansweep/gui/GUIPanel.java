@@ -27,17 +27,22 @@ public class GUIPanel extends JPanel
 {
 	
 	//Static variables
-	private static final int TILE_SIZE = 75; //This will be the size of the Tile
+	private static final int TILE_SIZE = 50; //This will be the size of the Tile
 	
 	//Variables
 	private Timer timer;
 	private Rectangle[][] floorMap;
-	private ArrayList<Tile> visitedTiles;
+	private ArrayList<Tile> sensorTiles;
 
 	public GUIPanel() 
 	{
-		floorMap = new Rectangle[FloorMap.FLOOR_SIZE_X][FloorMap.FLOOR_SIZE_Y];
-		visitedTiles = new ArrayList<Tile>();
+		initializeRectGrid();
+		sensorTiles = new ArrayList<Tile>();
+	}
+	
+	public void addNewTile(Tile _tile)
+	{
+		
 	}
 
 	/**
@@ -48,6 +53,25 @@ public class GUIPanel extends JPanel
 	{
 		validate();
 		repaint();
+	}
+	/**
+	 * Intended for internal use only
+	 * <p>Initializes the rectangle array</p>
+	 */
+	private void initializeRectGrid()
+	{
+		floorMap = new Rectangle[FloorMap.FLOOR_SIZE_X][FloorMap.FLOOR_SIZE_Y];
+		for(int x = 0; x < FloorMap.FLOOR_SIZE_X; x++)
+		{
+			for(int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++)
+			{
+				floorMap[x][y] = new Rectangle();
+				floorMap[x][y].x = x * TILE_SIZE;
+				floorMap[x][y].y = y * TILE_SIZE;
+				floorMap[x][y].width = TILE_SIZE;
+				floorMap[x][y].height = TILE_SIZE;
+			}
+		}
 	}
 
 	/*Action paintTimer = new AbstractAction() { // functionality of our timer:
@@ -72,12 +96,13 @@ public class GUIPanel extends JPanel
 		Graphics2D g2d = (Graphics2D) gd;
 		
 		//Clear all the screen before painting anything!
-		g2d.clearRect(0, 0, GUIFrame.FRAME_SIZE_X, GUIFrame.GUIPANEL_SIZE_Y);
+		g2d.clearRect(0, 0, GUIFrame.GUIPANEL_SIZE_X, GUIFrame.FRAME_SIZE_Y);
 		
 		// Paint map
 		try 
 		{
 			paintMap(g2d);
+			paintVisitedTiles(g2d);
 		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
@@ -91,16 +116,19 @@ public class GUIPanel extends JPanel
 		{
 			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) 
 			{
-				if ((x + y) % 2 == 0) 
-				{
-					_g2d.setColor(Color.BLACK);
-					_g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-				} else 
-				{
-					_g2d.setColor(Color.WHITE);
-					_g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-				}
+				_g2d.setColor(Color.DARK_GRAY);
+				_g2d.fillRect(floorMap[x][y].x, floorMap[x][y].y, floorMap[x][y].width, floorMap[x][y].height);
 			}
+		}
+		refreshScreen();
+	}
+	
+	public void paintVisitedTiles(Graphics2D _g2d)
+	{
+		for(Tile _tile : sensorTiles)
+		{
+			_g2d.setColor(_tile.getColor());
+			
 		}
 	}
 }

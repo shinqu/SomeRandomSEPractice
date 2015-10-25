@@ -26,11 +26,11 @@ public class GUIControl
 		guiPanel = new GUIPanel();
 		consolePanel = new GUIConsole();
 		
-		guiPanel.setPreferredSize(new Dimension(GUIFrame.FRAME_SIZE_X, GUIFrame.GUIPANEL_SIZE_Y));
-		consolePanel.setPreferredSize(new Dimension(GUIFrame.FRAME_SIZE_X, GUIFrame.CONSOLELOG_SIZE_Y));
+		guiPanel.setPreferredSize(new Dimension(GUIFrame.GUIPANEL_SIZE_X, GUIFrame.FRAME_SIZE_Y));
+		consolePanel.setPreferredSize(new Dimension(GUIFrame.CONSOLELOG_SIZE_X, GUIFrame.FRAME_SIZE_Y));
 		
 		//Set the layout of the container
-		panelContainer.setLayout(new BoxLayout(panelContainer, BoxLayout.Y_AXIS));
+		panelContainer.setLayout(new BoxLayout(panelContainer, BoxLayout.X_AXIS));
 		
 		panelContainer.add(guiPanel);
 		panelContainer.add(consolePanel);

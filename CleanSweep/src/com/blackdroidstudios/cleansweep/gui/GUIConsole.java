@@ -25,7 +25,7 @@ public class GUIConsole extends JPanel
 		Graphics2D g2d = (Graphics2D)gd;
 		
 		g2d.setColor(Color.BLACK);
-		g2d.fillRect(0, 0, GUIFrame.FRAME_SIZE_X, GUIFrame.CONSOLELOG_SIZE_Y);
+		g2d.fillRect(0, 0, GUIFrame.CONSOLELOG_SIZE_X, GUIFrame.FRAME_SIZE_Y);
 	}
 	
 }

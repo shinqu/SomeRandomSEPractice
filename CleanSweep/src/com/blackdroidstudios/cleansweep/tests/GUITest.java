@@ -16,7 +16,7 @@ public class GUITest
 			GUIControl ctrl = new GUIControl();
 			ctrl.initializeGUI();
 			
-			assertEquals(1280, ctrl.getFrameSizeX());
+			assertEquals(1400, ctrl.getFrameSizeX());
 		}catch(Exception e)
 		{
 			
