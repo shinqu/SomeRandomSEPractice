@@ -3,6 +3,7 @@ package com.blackdroidstudios.cleansweep.movementsensor;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.blackdroidstudios.cleansweep.gui.GUIObserver;
 import com.blackdroidstudios.cleansweep.map.Tile;
 import com.blackdroidstudios.cleansweep.map.Tile.floorType;
 import com.blackdroidstudios.cleansweep.map.Tile.tileType;
@@ -60,6 +61,7 @@ public class MovementMap
 		if(!visitedTiles.contains(_newTile))
 		{
 			visitedTiles.add(_newTile);
+			GUIObserver.addNewSeenTile(_newTile);
 			//Eliminate it from openTiles list if it's there
 			if(openTiles.contains(_newTile))
 			{
@@ -73,12 +75,24 @@ public class MovementMap
 		}	
 		
 	}
-	
-	private void registerOpenTile(Tile _openTile)
+	/**
+	 * This function will help us record open adjascent tiles, so if we ever get stuck, we can always go back to the nearest one.
+	 * In the event there are no more open tiles, it means we have recorded ALL of the floor.
+	 * @param _openTile
+	 */
+	public void registerOpenTiles(ArrayList<Tile> _openTile)
 	{
-		openTiles.add(_openTile);
+		for(Tile _t : _openTile)
+		{
+			if(_t.getTileType() == tileType.Passable && !openTiles.contains(_t) && !visitedTiles.contains(_t))
+			{
+				openTiles.add(_t);
+			}
+		}
 	}
-	
+	/**
+	 * This method will return a path to the nearest charging station available
+	 */
 	public void returnToCS()
 	{
 		for(Tile _cs : chargingStations)
@@ -100,8 +114,6 @@ public class MovementMap
 		ArrayList<Tile> openList = new ArrayList<Tile>();
 		ArrayList<Tile> closedList = new ArrayList<Tile>();
 		ArrayList<Tile> finalPath = new ArrayList<Tile>();
-		
-		Tile currentTile = null;
 		
 		//Let's roll baby!
 		//First we add the starting tile to the open List
@@ -150,16 +162,11 @@ public class MovementMap
 					openList.add(_t);
 				}
 			}
+			
 					
 		}
 		
 		return finalPath;
-	}
-	public ArrayList<Tile> findPath(Tile _currentTile)
-	{	
-		Tile newTargetTile = null;
-		
-		return null;
 	}
 	/**
 	 * <p>This is a top secret function, don't use it!!</p>
@@ -171,11 +178,22 @@ public class MovementMap
 	{
 		ArrayList<Tile> finalPath = new ArrayList<Tile>();
 		
+		Collections.reverse(_foundPath);
 		//If the closed List is empty, just return a simple list
 		if(!_foundPath.isEmpty())
 		{
 			finalPath.add(_goal);
-			
+			for(Tile _t : _foundPath)
+			{
+				for(Tile _n : _t.getNeighbours())
+				{
+					if(finalPath.contains(_n))
+					{
+						finalPath.add(_t);
+						break;
+					}
+				}
+			}
 		}else
 		{
 			finalPath.add(_start);
@@ -201,7 +219,5 @@ public class MovementMap
 	{
 		return (Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY()));
 	}
-	
-	
 	
 }

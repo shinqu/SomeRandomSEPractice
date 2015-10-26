@@ -42,7 +42,10 @@ public class GUIPanel extends JPanel
 	
 	public void addNewTile(Tile _tile)
 	{
-		
+		if(!sensorTiles.contains(_tile))
+		{
+			sensorTiles.add(_tile);
+		}
 	}
 
 	/**
@@ -73,20 +76,6 @@ public class GUIPanel extends JPanel
 			}
 		}
 	}
-
-	/*Action paintTimer = new AbstractAction() { // functionality of our timer:
-		public void actionPerformed(ActionEvent e) {
-			// if(pi < FloorMap.FLOOR_SIZE_X && pj < FloorMap.FLOOR_SIZE_Y){
-			if (CheckIfAllTilesVisited() == false) 
-			{
-				//Move();
-				repaint();
-			} else
-			{
-				timer.stop();
-			}
-		}
-	};*/
 
 
 	// REALLY IMPORTANT!!!!! O.o
@@ -128,7 +117,11 @@ public class GUIPanel extends JPanel
 		for(Tile _tile : sensorTiles)
 		{
 			_g2d.setColor(_tile.getColor());
-			
+			_g2d.fillRect(floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, TILE_SIZE, TILE_SIZE);
+			if(_tile.getSprite() != null)
+			{
+				_g2d.drawImage(_tile.getSprite(), floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, this);
+			}
 		}
 	}
 }
