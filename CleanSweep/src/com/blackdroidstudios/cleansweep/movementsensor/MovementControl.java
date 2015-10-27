@@ -71,6 +71,8 @@ public class MovementControl
 				
 				//Remove the current tile from the path
 				path.remove(0);
+				//Report it to Log
+				//Reporter.updatePosition(getX(), getY());
 			}else
 			{
 				map.registerOpenTiles(currentTile.getNeighbours());
