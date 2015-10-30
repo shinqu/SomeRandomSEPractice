@@ -30,7 +30,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 	 * and run individual tiles as arguments through the methods. 
 	 * 
 	 */
-	public DirtSensor(Floor tile) 
+	public DirtSensor(Tile tile) 
 	{
 		dirtDetected = tile.getDirt();
 		currentTile = tile;
@@ -66,7 +66,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 	 * Implements cleanCheck logic to print to Tile to display whether clean or dirty.  Can possibly add
 	 * color coding to simulation.  
 	 */
-	public String registerCell() 
+	public String registerCell() //create array list
 	{  
 		
 		/*if (cleanState = false) {
@@ -80,26 +80,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		return "";
 	}
 	
-	/**
-	 * Cleaning function of dirt sensor.  Removes one unit of dirt and registers cell as dirty if a unit remains.
-	 * Need to figure out algorithm to trace back to cells still containing dirt.
-	 * @return
-	 */
-	public int cleanDirt() { 
-		if (dirtDetected > 0) 
-		{
-			dirtDetected -= 1;
-			System.out.println("CleanSweep has removed one unit of dirt from tile");
-			System.out.println("tile still has" + dirtDetected + "units of dirt");
-			registerCell();
-		}
-		else {
-			System.out.print("There is no Dirt to clean");
-			registerCell();
-		}
-		//tile.dirt = dirtDetected;
-		return dirtDetected;
-	}
+	
 	
 	/**
 	 * Created this main just for example purposes of how DirtSensor can be used.
@@ -112,4 +93,4 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		ds.detectDirt();
 	}*/
 
-}
+
