@@ -23,7 +23,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 {
 	private int dirtDetected;
 	public boolean cleanState;
-	private Floor currentTile;
+	private Tile currentTile;
 
 	/**
 	 * Constructor Class currently run off of one single tile, would like to ultimately use floor plan as argument, 
@@ -79,8 +79,14 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		
 		return "";
 	}
+
+	@Override
+	public int cleanDirt() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
-	
+}
 	
 	/**
 	 * Created this main just for example purposes of how DirtSensor can be used.
