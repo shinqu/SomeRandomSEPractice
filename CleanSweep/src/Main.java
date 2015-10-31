@@ -1,17 +1,20 @@
 import com.blackdroidstudios.cleansweep.gui.GUIControl;
 import com.blackdroidstudios.cleansweep.mainsensor.CleanSweepMain;
 import com.blackdroidstudios.cleansweep.map.FloorGenerator;
+import com.blackdroidstudios.cleansweep.map.Tile;
 
 public class Main 
 {
 	//Variables
-	private CleanSweepMain cleanSweep;
-	private FloorGenerator floorGen;
+	private static CleanSweepMain cleanSweep;
+	private static FloorGenerator floorGen;
 	
-	public static void main(String[] args) throws InterruptedException
+	public static void main(String[] args) throws Exception
 	{
-		GUIControl ctrl = new GUIControl();
-		ctrl.initializeGUI();	
+		floorGen = new FloorGenerator();
+		Tile[][] newMap = floorGen.generateEmptyMap();
+		cleanSweep = new CleanSweepMain();
+		cleanSweep.startVacuum(newMap[0][0]);
 	}
 	
 }

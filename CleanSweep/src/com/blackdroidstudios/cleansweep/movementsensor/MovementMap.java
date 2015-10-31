@@ -38,6 +38,11 @@ public class MovementMap
 		return visitedTiles;
 	}
 	
+	public ArrayList<Tile> getOpenTiles()
+	{
+		return openTiles;
+	}
+	
 	/**
 	 * <p>Use this function to check if a Tile has been visited. (Pretty handy!)</p>
 	 * @param _tile The Tile to check if visited before
@@ -219,5 +224,7 @@ public class MovementMap
 	{
 		return (Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY()));
 	}
+	
+	
 	
 }

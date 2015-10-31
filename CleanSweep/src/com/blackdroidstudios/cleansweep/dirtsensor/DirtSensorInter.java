@@ -14,7 +14,8 @@ import com.blackdroidstudios.cleansweep.surfacesensor.*;
  * @author brooney
  *
  */
-public interface DirtSensorInter {
+public interface DirtSensorInter 
+{
 	
 	/**
 	 * Method used to check if dirt is contained on a tile. Updates private variable dirtDetected with

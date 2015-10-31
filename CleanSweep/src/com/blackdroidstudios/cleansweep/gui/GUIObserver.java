@@ -23,10 +23,15 @@ public class GUIObserver
 			panel.addNewTile(_tile);
 		}
 	}
-	
+	/**
+	 * This method will tell 
+	 * @param _x
+	 * @param _y
+	 */
 	public static void updateCleanSweepPos(int _x, int _y)
 	{
 		
 	}
+	
 	
 }

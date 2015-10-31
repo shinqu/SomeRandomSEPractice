@@ -91,6 +91,7 @@ public class MovementControl
 	{
 		currentTile = _tile;
 		map.registerTile(_tile);
+		map.registerOpenTiles(currentTile.getNeighbours());
 	}
 	/**
 	 * @return Return the path to be traveled
@@ -103,5 +104,10 @@ public class MovementControl
 	public ArrayList<Tile> getVisitedTiles()
 	{
 		return map.getVisitedTiles();
+	}
+	
+	public ArrayList<Tile> getOpenTiles()
+	{
+		return map.getOpenTiles();
 	}
 }

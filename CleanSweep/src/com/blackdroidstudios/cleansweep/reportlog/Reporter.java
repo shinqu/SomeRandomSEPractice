@@ -7,7 +7,8 @@ import com.blackdroidstudios.cleansweep.map.Tile.floorType;
 import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 import com.blackdroidstudios.cleansweep.surfacesensor.SurfaceSensor;
 
-public class Reporter {
+public class Reporter 
+{
 	public static void report()
 	{
 		//Tile currentTile = Sensor.getCurrent();
@@ -23,6 +24,5 @@ public class Reporter {
 		int flrY = Floor.getY();
 		int dirtLvl = Floor.getDirt();
 		 */
-
 	}
 }

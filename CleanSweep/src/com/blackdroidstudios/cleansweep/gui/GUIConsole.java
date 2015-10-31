@@ -1,5 +1,10 @@
 package com.blackdroidstudios.cleansweep.gui;
 
+/**
+ * This Class is responsible for displaying the Log Console
+ * @author Armando Garcin
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

@@ -15,9 +15,9 @@ import com.blackdroidstudios.cleansweep.surfacesensor.*;
 public class DirtSensorFactory 
 {
 	
-	public static DirtSensorInter createDirtSensor(Tile tile)
+	public static DirtSensorInter createDirtSensor()
 	{
-		return new DirtSensor(tile);
+		return new DirtSensor();
 	}
 
 }

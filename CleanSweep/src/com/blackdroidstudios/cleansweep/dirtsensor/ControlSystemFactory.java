@@ -8,13 +8,14 @@ import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
  * @author brooney
  *
  */
-public class ControlSystemFactory {
+public class ControlSystemFactory 
+{
 		
-		public static ControlSystem createControlSystem(DirstSensor ds) //Not sure if correct way to bring together both classes
+		public static ControlSystem createControlSystem(DirtSensor ds) //Not sure if correct way to bring together both classes
 		{
 			ControlSystem cs = new ControlSystemImpl(ds);
 			return cs;
 		}
 
-	}
+}
 

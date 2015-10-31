@@ -23,8 +23,17 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 {
 	private int dirtDetected;
 	public boolean cleanState;
-	private Floor currentTile;
+	private Tile currentTile;
 
+	/**
+	 * Can't hurt to have a 
+	 */
+	public DirtSensor()
+	{
+		dirtDetected = 0;
+		cleanState = true;
+		currentTile = null;
+	}
 	/**
 	 * Constructor Class currently run off of one single tile, would like to ultimately use floor plan as argument, 
 	 * and run individual tiles as arguments through the methods. 
@@ -42,6 +51,15 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 	 */
 	public int detectDirt() {
 		dirtDetected = currentTile.getDirt();
+		return dirtDetected;
+	}
+	
+	public int detectDirt(Tile _tile)
+	{
+		currentTile = _tile;
+		
+		dirtDetected = currentTile.getDirt();
+		
 		return dirtDetected;
 	}
 	
@@ -79,6 +97,12 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		
 		return "";
 	}
+
+	@Override
+	public int cleanDirt() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
@@ -93,4 +117,4 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		ds.detectDirt();
 	}*/
 
-
+}
