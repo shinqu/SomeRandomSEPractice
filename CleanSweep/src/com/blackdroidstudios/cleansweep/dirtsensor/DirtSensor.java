@@ -104,7 +104,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		return 0;
 	}
 	
-	
+}
 	
 	/**
 	 * Created this main just for example purposes of how DirtSensor can be used.

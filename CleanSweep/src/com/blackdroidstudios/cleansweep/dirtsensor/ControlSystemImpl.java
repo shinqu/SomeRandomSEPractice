@@ -1,7 +1,12 @@
 package com.blackdroidstudios.cleansweep.dirtsensor;
 
+<<<<<<< HEAD
 import com.blackdroidstudios.cleansweep.movementsensor.MovementControl;
 import com.blackdroidstudios.cleansweep.movementsensor.MovementMap;
+=======
+import com.blackdroidstudios.cleansweep.movementsensor.MovementMap;
+import com.blackdroidstudios.cleansweep.movementsensor.MovementControl;
+>>>>>>> cbc520a66b2ca41632f3abd8cee0083edd71a44c
 import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
 
 
@@ -57,9 +62,14 @@ public class ControlSystemImpl implements ControlSystem
 	/**
 	 * To be used when dirtHolder > 50.  Should be implemented through logic sequence
 	 */
+<<<<<<< HEAD
 	public void emptyDirtHolder() 
 	{
 			//MovementMap.returnToCs();  
+=======
+	public void emptyDirtHolder() {
+			MovementMap.returnToCS();  
+>>>>>>> cbc520a66b2ca41632f3abd8cee0083edd71a44c
 			dirtHolder = 0; 
 	}
 	

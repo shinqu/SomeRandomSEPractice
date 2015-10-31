@@ -16,12 +16,12 @@ public class ChargingStation implements Tile{
 	private floorType myFloorType;
 	private tileType myTileType;
 	
-	public ChargingStation(int x, int y, floorType floorType, Color color)
+	public ChargingStation(int x, int y, floorType _floorType, Color color)
 	{
 		//Auto generated, no need to reference from constructor
 		this.x = x;
 		this.y = y;
-		this.myFloorType = floorType;
+		this.myFloorType = _floorType;
 		this.myTileType = tileType.Passable;
 		this.color = color;
 		this.neighbours = new ArrayList<Tile>();
