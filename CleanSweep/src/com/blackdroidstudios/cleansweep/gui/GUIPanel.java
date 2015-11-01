@@ -33,11 +33,22 @@ public class GUIPanel extends JPanel
 	private Timer timer;
 	private Rectangle[][] floorMap;
 	private ArrayList<Tile> sensorTiles;
+	private Image cleanSweepSprite;
+	private Tile cleanSweepTile;
 
 	public GUIPanel() 
 	{
 		initializeRectGrid();
 		sensorTiles = new ArrayList<Tile>();
+		
+		try
+		{
+			File path = new File("src/resources/images/CleanSweep_Sprite.png");
+			cleanSweepSprite = ImageIO.read(path);
+		}catch(Exception e)
+		{
+			cleanSweepSprite = null;
+		}
 	}
 	
 	public void addNewTile(Tile _tile)
@@ -46,6 +57,12 @@ public class GUIPanel extends JPanel
 		{
 			sensorTiles.add(_tile);
 		}
+		refreshScreen();
+	}
+	
+	public void updateCSPos(Tile _tile)
+	{
+		cleanSweepTile = _tile;
 	}
 
 	/**
@@ -92,6 +109,7 @@ public class GUIPanel extends JPanel
 		{
 			paintMap(g2d);
 			paintVisitedTiles(g2d);
+			paintCSPosition(g2d);
 		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
@@ -114,14 +132,26 @@ public class GUIPanel extends JPanel
 	
 	public void paintVisitedTiles(Graphics2D _g2d)
 	{
-		for(Tile _tile : sensorTiles)
+		if(!sensorTiles.isEmpty())
 		{
-			_g2d.setColor(_tile.getColor());
-			_g2d.fillRect(floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, TILE_SIZE, TILE_SIZE);
-			if(_tile.getSprite() != null)
+			for(Tile _tile : sensorTiles)
 			{
-				_g2d.drawImage(_tile.getSprite(), floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, this);
+				_g2d.setColor(_tile.getColor());
+				_g2d.fillRect(floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, TILE_SIZE, TILE_SIZE);
+				if(_tile.getSprite() != null && _tile.getDirt() > 0)
+				{
+					_g2d.drawImage(_tile.getSprite(), floorMap[_tile.getX()][_tile.getY()].x, floorMap[_tile.getX()][_tile.getY()].y, this);
+				}
 			}
+		}
+	}
+	
+	public void paintCSPosition(Graphics2D _g2d)
+	{
+		_g2d.setColor(cleanSweepTile.getColor());
+		if(cleanSweepSprite != null)
+		{
+			_g2d.drawImage(cleanSweepSprite, floorMap[cleanSweepTile.getX()][cleanSweepTile.getY()].x, floorMap[cleanSweepTile.getX()][cleanSweepTile.getY()].y, this);
 		}
 	}
 }

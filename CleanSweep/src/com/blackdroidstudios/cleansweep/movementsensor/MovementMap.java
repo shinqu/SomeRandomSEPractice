@@ -92,6 +92,7 @@ public class MovementMap
 			if(_t.getTileType() == tileType.Passable && !openTiles.contains(_t) && !visitedTiles.contains(_t))
 			{
 				openTiles.add(_t);
+				GUIObserver.addNewSeenTile(_t);
 			}
 		}
 	}

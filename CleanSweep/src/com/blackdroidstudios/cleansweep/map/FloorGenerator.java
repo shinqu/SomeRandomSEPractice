@@ -9,6 +9,7 @@ package com.blackdroidstudios.cleansweep.map;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.blackdroidstudios.cleansweep.map.Tile.floorType;
 
@@ -34,9 +35,20 @@ public class FloorGenerator
 		{
 			for(int _y = 0; _y < FloorMap.FLOOR_SIZE_Y; _y++)
 			{
-				newMap[_x][_y] = new Floor(_x, _y, floorType.Plain, Color.LIGHT_GRAY, 0);
+				if(_x == 0 && _y == 0)
+				{
+					newMap[_x][_y] = new Floor(_x, _y, floorType.ChargingStation, Color.CYAN, 0);
+				}else
+				{
+					Random rnd = new Random();//To be removed
+					newMap[_x][_y] = new Floor(_x, _y, floorType.Plain, Color.LIGHT_GRAY, rnd.nextInt(10) - 7);
+				}
+				
 			}
 		}
+		
+		
+		
 		
 		addNeighbours(newMap);
 		

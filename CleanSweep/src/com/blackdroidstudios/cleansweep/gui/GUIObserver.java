@@ -11,6 +11,11 @@ public class GUIObserver
 {
 	private static GUIPanel panel;
 	
+	public static void refreshPanel()
+	{
+		panel.refreshScreen();
+	}
+	
 	public static void registerPanel(GUIPanel _panel)
 	{
 		panel = _panel;
@@ -22,15 +27,16 @@ public class GUIObserver
 		{
 			panel.addNewTile(_tile);
 		}
+		refreshPanel();
 	}
 	/**
 	 * This method will tell 
 	 * @param _x
 	 * @param _y
 	 */
-	public static void updateCleanSweepPos(int _x, int _y)
+	public static void updateCleanSweepPos(Tile _tile)
 	{
-		
+		panel.updateCSPos(_tile);
 	}
 	
 	

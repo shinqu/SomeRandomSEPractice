@@ -21,12 +21,16 @@ import com.blackdroidstudios.cleansweep.surfacesensor.*;
  */
 public class DirtSensor implements DirtSensorInter  //testing out git
 {
+	//Static
+	public static final int DIRT_MAX_CAPACITY = 50;
+	
 	private int dirtDetected;
 	public boolean cleanState;
 	private Tile currentTile;
+	private int currentStorage;
 
 	/**
-	 * Can't hurt to have a 
+	 * Can't hurt to have a default constructor
 	 */
 	public DirtSensor()
 	{
@@ -99,13 +103,12 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 	}
 
 	@Override
-	public int cleanDirt() {
+	public int cleanDirt() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-}
-	
+
 	/**
 	 * Created this main just for example purposes of how DirtSensor can be used.
 	 * @param args

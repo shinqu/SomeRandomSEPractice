@@ -61,18 +61,21 @@ public class MovementControl
 			//Move it!!
 			if(currentTile != path.get(0))
 			{
-				//Register all open tiles
-				map.registerOpenTiles(currentTile.getNeighbours());
+				
 				//Move
 				currentTile = path.get(0);
 				//Register new Tile
 				map.registerTile(currentTile);
+				//Register all open tiles
+				map.registerOpenTiles(currentTile.getNeighbours());
 				//Update the battery usage here...
 				
 				//Remove the current tile from the path
 				path.remove(0);
 				//Report it to Log
 				//Reporter.updatePosition(getX(), getY());
+				//Update in GUI
+				GUIObserver.updateCleanSweepPos(currentTile);
 			}else
 			{
 				map.registerOpenTiles(currentTile.getNeighbours());
@@ -92,6 +95,7 @@ public class MovementControl
 		currentTile = _tile;
 		map.registerTile(_tile);
 		map.registerOpenTiles(currentTile.getNeighbours());
+		GUIObserver.updateCleanSweepPos(_tile);
 	}
 	/**
 	 * @return Return the path to be traveled

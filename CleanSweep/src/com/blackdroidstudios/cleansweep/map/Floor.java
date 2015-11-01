@@ -7,7 +7,11 @@ package com.blackdroidstudios.cleansweep.map;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Floor implements Tile
 {
@@ -24,7 +28,7 @@ public class Floor implements Tile
 	private boolean IsVisited;
 	
 	
-	//Custom Constructor
+	//Argument Constructor
 	/**
 	 * @author Armando Garcin
 	 * @param _x The X coordinate in the map
@@ -44,8 +48,25 @@ public class Floor implements Tile
 		this.myFloorType = floorType;
 		this.myTileType = tileType.Passable;
 		this.color = color;
-		this.dirt = dirt;
+		if(dirt < 0 || this.myFloorType == floorType.ChargingStation)
+		{
+			this.dirt = 0;
+		}else
+		{
+			this.dirt = dirt;
+		}
 		this.neighbours = new ArrayList<Tile>();
+		
+		try 
+		{
+			File path = new File("src/resources/images/Dust_bunny_Sprite.png");
+			this.sprite = ImageIO.read(path);
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.sprite = null;
+		}
 	}
 	
 	@Override
