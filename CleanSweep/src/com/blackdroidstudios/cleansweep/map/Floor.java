@@ -1,7 +1,7 @@
 package com.blackdroidstudios.cleansweep.map;
 
 /**
- * @author Armando Garcin
+ * @author Armando Garcin, Neha Beke
  * 
  */
 
