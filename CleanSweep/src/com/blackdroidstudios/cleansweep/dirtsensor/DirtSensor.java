@@ -28,6 +28,7 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 	public boolean cleanState;
 	private Tile currentTile;
 	private int currentStorage;
+	public boolean stopCleaning;
 
 	/**
 	 * Can't hurt to have a default constructor
@@ -119,5 +120,51 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		DirtSensor ds = new DirtSensor(tile2);
 		ds.detectDirt();
 	}*/
+	
+	@Override
+	public boolean stopCleaning() {
+		boolean tempStopCleaning;
 
+		// Check if clean sweep has visited every accessible location on the current floor.
+		tempStopCleaning = checkEveryLocIsCleaned();
+		stopCleaning = tempStopCleaning;
+		if (tempStopCleaning == true) {
+			return true;
+		}
+		
+		// Check if 50-unit dirt capacity has been met.
+		if (currentStorage >= 50) {
+			tempStopCleaning = true;
+			return true;
+		}
+			
+		// Check if clean sweep only has enough power remaining to
+		// return to its charging station. See
+		// Power Management for more details.
+		
+		return false;
+	}
+
+	/**
+	 * Checks if clean sweep has visited every accessible location on the
+	 * current floor.
+	 * 
+	 * @return
+	 */
+	public boolean checkEveryLocIsCleaned() {
+		FloorGenerator floor = new FloorGenerator();
+		Tile[][] floorTileCollection = floor.generateEmptyMap();
+
+		boolean tempStopCleaning = true;
+		for (int i = 0; i < FloorMap.FLOOR_SIZE_X; i++) {
+			for (int j = 0; j < FloorMap.FLOOR_SIZE_Y; j++) {
+				Tile tile = floorTileCollection[i][j];
+				if (tile.getDirt() > 0) {
+					tempStopCleaning = false;
+					break;
+				}
+			}
+		}
+		return tempStopCleaning;
+	}
 }

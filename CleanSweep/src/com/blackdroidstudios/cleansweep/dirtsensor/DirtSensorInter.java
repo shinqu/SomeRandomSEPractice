@@ -42,4 +42,6 @@ public interface DirtSensorInter
 	 */
 	public int cleanDirt();
 
+	boolean stopCleaning();
+
 }
