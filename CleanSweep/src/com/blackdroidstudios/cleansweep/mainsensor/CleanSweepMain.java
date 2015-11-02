@@ -78,6 +78,8 @@ public class CleanSweepMain
 			//If everything went well with the battery-n-dirt check up, let's move!
 			movementSensor.Move();
 			
+			guiControl.refreshGUI();
+			
 			tempCount++;
 			Thread.sleep(500);
 		}

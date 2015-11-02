@@ -30,7 +30,6 @@ public class Floor implements Tile
 	
 	//Argument Constructor
 	/**
-	 * @author Armando Garcin
 	 * @param _x The X coordinate in the map
 	 * @param _y the Y coordinate in the map
 	 * @param _floorType The type of floor. 
@@ -184,6 +183,14 @@ public class Floor implements Tile
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Simple function that will allow the Dirt sensor to erase all dirt from the current Tile
+	 */
+	public void cleanFloor()
+	{
+		this.dirt = 0;
 	}
 	
 }

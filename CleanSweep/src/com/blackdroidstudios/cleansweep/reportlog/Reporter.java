@@ -1,5 +1,9 @@
 package com.blackdroidstudios.cleansweep.reportlog;
 
+/**
+ * @author Xin Qu
+ */
+
 //Formatted output debugging and analysis 
 //import com.blackdroidstudios.cleansweep.gui.Actor;
 import com.blackdroidstudios.cleansweep.map.Tile;

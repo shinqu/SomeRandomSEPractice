@@ -21,7 +21,7 @@ public class GUIObserver
 		panel = _panel;
 	}
 	
-	public static void addNewSeenTile(Tile _tile)
+	public static void addNewTile(Tile _tile)
 	{
 		if(panel != null)
 		{

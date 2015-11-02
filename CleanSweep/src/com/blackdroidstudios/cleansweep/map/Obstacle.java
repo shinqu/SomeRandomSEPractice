@@ -19,9 +19,23 @@ public class Obstacle implements Tile
 	private tileType myTileType;
 
 	//Argument Constructor
+	public Obstacle(int _x, int _y)
+	{
+		this.neighbours = new ArrayList<Tile>();
+		this.sprite = null;
+		this.color = Color.GRAY;
+		this.x = _x;
+		this.y = _y;
+		this.myTileType = tileType.Impassable;
+	}
 	public Obstacle(int _x, int _y, Image _sprite)
 	{
-		
+		this.neighbours = new ArrayList<Tile>();
+		this.sprite = _sprite;
+		this.color = Color.GRAY;
+		this.x = _x;
+		this.y = _y;
+		this.myTileType = tileType.Impassable;
 	}
 
 	@Override
@@ -52,37 +66,43 @@ public class Obstacle implements Tile
 	}
 
 	@Override
-	public int getDirt() {
+	public int getDirt() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Image getSprite() {
+	public Image getSprite() 
+	{
 		// TODO Auto-generated method stub
-		return null;
+		return this.sprite;
 	}
 
 	@Override
-	public Color getColor() {
+	public Color getColor() 
+	{
 		// TODO Auto-generated method stub
-		return null;
+		return this.color;
 	}
 
 	@Override
-	public ArrayList<Tile> getNeighbours() {
+	public ArrayList<Tile> getNeighbours() 
+	{
 		// TODO Auto-generated method stub
-		return null;
+		return this.neighbours;
 	}
 
 	@Override
-	public void addNeighbour(Tile _neighbour) {
+	public void addNeighbour(Tile _neighbour) 
+	{
 		// TODO Auto-generated method stub
-		
+		this.neighbours.add(_neighbour);
 	}
 
 	@Override
-	public Tile getEast() {
+	public Tile getEast() 
+	{
 		// TODO Auto-generated method stub
 		for(Tile _floor : neighbours)
 		{
@@ -95,7 +115,8 @@ public class Obstacle implements Tile
 	}
 
 	@Override
-	public Tile getNorth() {
+	public Tile getNorth() 
+	{
 		for(Tile _floor : neighbours)
 		{
 			if(_floor.getY() > this.y)
@@ -107,7 +128,8 @@ public class Obstacle implements Tile
 	}
 
 	@Override
-	public Tile getSouth() {
+	public Tile getSouth() 
+	{
 		for(Tile _floor : neighbours)
 		{
 			if(_floor.getY() < this.y)
@@ -119,7 +141,8 @@ public class Obstacle implements Tile
 	}
 
 	@Override
-	public Tile getWest() {
+	public Tile getWest() 
+	{
 		for(Tile _floor : neighbours)
 		{
 			if(_floor.getX() < this.x)

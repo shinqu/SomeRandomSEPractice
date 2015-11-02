@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.blackdroidstudios.cleansweep.gui.GUIObserver;
 import com.blackdroidstudios.cleansweep.map.Tile;
 import com.blackdroidstudios.cleansweep.map.Tile.tileType;
+import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 
 /**
  * @Author Armando Garcin
@@ -82,7 +83,8 @@ public class MovementControl
 				map.registerTile(currentTile);
 				path.remove(0);
 			}
-			
+			Reporter.getInstance().setCurrentLocX(currentTile.getX());
+			Reporter.getInstance().setCurrentLocY(currentTile.getY());
 		}
 	}
 	

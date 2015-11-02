@@ -58,4 +58,10 @@ public class GUIControl
 		return frame.FRAME_SIZE_Y;
 	}
 	
+	public void refreshGUI()
+	{
+		guiPanel.refreshScreen();
+		consolePanel.refreshScreen();
+	}
+	
 }

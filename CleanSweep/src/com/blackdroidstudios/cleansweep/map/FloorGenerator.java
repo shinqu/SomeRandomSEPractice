@@ -38,6 +38,9 @@ public class FloorGenerator
 				if(_x == 0 && _y == 0)
 				{
 					newMap[_x][_y] = new Floor(_x, _y, floorType.ChargingStation, Color.CYAN, 0);
+				}else if(_x == 0 && _y == 3)
+				{
+					newMap[_x][_y] = new Obstacle(_x, _y, null);
 				}else
 				{
 					Random rnd = new Random();//To be removed

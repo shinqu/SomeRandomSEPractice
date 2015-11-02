@@ -21,6 +21,7 @@ public class MovementMap
 	private ArrayList<Tile> visitedTiles;
 	private ArrayList<Tile> openTiles;
 	private ArrayList<Tile> chargingStations;
+	private ArrayList<Tile> obstacleTiles;
 
 	//Default Constructor
 	public MovementMap()
@@ -28,6 +29,7 @@ public class MovementMap
 		visitedTiles = new ArrayList<Tile>();
 		openTiles = new ArrayList<Tile>();
 		chargingStations = new ArrayList<Tile>();
+		obstacleTiles = new ArrayList<Tile>();
 	}
 	
 	/**
@@ -66,7 +68,7 @@ public class MovementMap
 		if(!visitedTiles.contains(_newTile))
 		{
 			visitedTiles.add(_newTile);
-			GUIObserver.addNewSeenTile(_newTile);
+			GUIObserver.addNewTile(_newTile);
 			//Eliminate it from openTiles list if it's there
 			if(openTiles.contains(_newTile))
 			{
@@ -92,7 +94,11 @@ public class MovementMap
 			if(_t.getTileType() == tileType.Passable && !openTiles.contains(_t) && !visitedTiles.contains(_t))
 			{
 				openTiles.add(_t);
-				GUIObserver.addNewSeenTile(_t);
+				GUIObserver.addNewTile(_t);
+			}else if(_t.getTileType() == tileType.Impassable && !obstacleTiles.contains(_t))
+			{
+				obstacleTiles.add(_t);
+				GUIObserver.addNewTile(_t);
 			}
 		}
 	}
