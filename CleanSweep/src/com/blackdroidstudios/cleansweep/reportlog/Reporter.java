@@ -13,11 +13,13 @@ public class Reporter {
 	
 	Reporter() {}
 	
-	int batteryCharge;
-	int currentLocX;
-	int currentLocY;
-	int currentDirtLvl;
-	floorType currentFlrType;
+	private int batteryCharge;
+	private int currentLocX;
+	private int currentLocY;
+	private int currentDirtLvl;
+	private boolean isCharging;
+	private boolean isCleaning;
+	private floorType currentFlrType;
 	
 	public static Reporter getInstance(){
 		if (instance == null){
@@ -51,11 +53,30 @@ public class Reporter {
 		this.currentFlrType = flrType;
 	}
 	
+	public int getCurrentBattery()
+	{
+		return batteryCharge;
+	}
+	
+	public int getCurrentLocX()
+	{
+		return currentLocX;
+	}
+	
+	public int getCurrentLocY()
+	{
+		return currentLocY;
+	}
+	
+	public int getCurrentDirtLvl()
+	{
+		return currentDirtLvl;
+	}
+	
 	public static String report()
 	{
 		return ("Clean Sweep is currently at " + 
-				Reporter.getInstance().currentLocX + "," + Reporter.getInstance().currentLocX +
+				Reporter.getInstance().currentLocX + "," + Reporter.getInstance().currentLocY +
 				"\n with a battery level of: " + Reporter.getInstance().batteryCharge);
-
 	}
 }
