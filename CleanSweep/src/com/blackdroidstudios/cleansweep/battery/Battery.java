@@ -8,7 +8,9 @@ import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 public class Battery 
 {	
 	private static int batteryCharge = 100;
-	floorType myCurrentFloor;
+	private int batteryLoss = 0;
+	private floorType myCurrentFloor;
+	
 	
 	/*switch(myCurrentFloor)
 	{
@@ -18,21 +20,33 @@ public class Battery
 	default:			return null;
 	}*/
 	
-	
-	/*void calcCharge()
+	void move(floorType from, floorType to)
 	{
-		if (myCurrentFloor = Plain)
-			batteryCharge --;
-		else if (myCurrentFloor == LowCarpet)
-			batteryCharge -= 2;
-		else if (myCurrentFloor == HighCarpet)
-			batteryCharge -= 3;
-		//Charging station case
-		else
-		{
-			//method for charging the CS
-		}
-	}*/
+		if (from == floorType.Plain)
+			batteryLoss ++;
+		else if (from == floorType.LowCarpet)
+			batteryLoss += 2;
+		else if (from == floorType.HighCarpet)
+			batteryLoss += 3;
+		
+		if (to == floorType.Plain)
+			batteryLoss ++;
+		else if (to == floorType.LowCarpet)
+			batteryLoss += 2;
+		else if (to == floorType.HighCarpet)
+			batteryLoss += 3;
+		
+		batteryLoss = batteryLoss / 2;
+		batteryCharge -= batteryLoss;
+		batteryLoss = 0;
+		updateReport();
+	}
+	
+	public void chargeCS()
+	{
+		if (myCurrentFloor == floorType.ChargingStation)
+			batteryCharge = 100;
+	}
 	
 	public static int getCharge()
 	{
