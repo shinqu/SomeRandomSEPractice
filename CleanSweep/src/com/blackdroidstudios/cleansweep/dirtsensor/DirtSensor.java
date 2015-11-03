@@ -167,4 +167,14 @@ public class DirtSensor implements DirtSensorInter  //testing out git
 		}
 		return tempStopCleaning;
 	}
+	@Override
+	public void cleanTile(Tile _tile) 
+	{
+		// TODO Auto-generated method stub
+		if(_tile.getDirt() > 0)
+		{
+			Floor _f = (Floor)_tile;
+			_f.cleanFloor();
+		}
+	}
 }

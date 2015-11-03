@@ -23,7 +23,7 @@ public class Obstacle implements Tile
 	{
 		this.neighbours = new ArrayList<Tile>();
 		this.sprite = null;
-		this.color = Color.GRAY;
+		this.color = Color.RED;
 		this.x = _x;
 		this.y = _y;
 		this.myTileType = tileType.Impassable;
@@ -32,7 +32,7 @@ public class Obstacle implements Tile
 	{
 		this.neighbours = new ArrayList<Tile>();
 		this.sprite = _sprite;
-		this.color = Color.GRAY;
+		this.color = Color.RED;
 		this.x = _x;
 		this.y = _y;
 		this.myTileType = tileType.Impassable;

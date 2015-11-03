@@ -59,4 +59,5 @@ public class GUIConsole extends JPanel
 		_g2d.drawString("Current Position: X:" + Reporter.getInstance().getCurrentLocX() + " Y:" + Reporter.getInstance().getCurrentLocY(), 15, 30);
 	}
 	
+	
 }

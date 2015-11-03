@@ -26,6 +26,9 @@ public class GUIControl
 		guiPanel = new GUIPanel();
 		consolePanel = new GUIConsole();
 		GUIObserver.registerPanel(guiPanel);
+		/*
+		 * Put the ErrorReporter Here!!
+		 */
 		
 		guiPanel.setPreferredSize(new Dimension(GUIFrame.GUIPANEL_SIZE_X, GUIFrame.FRAME_SIZE_Y));
 		consolePanel.setPreferredSize(new Dimension(GUIFrame.CONSOLELOG_SIZE_X, GUIFrame.FRAME_SIZE_Y));

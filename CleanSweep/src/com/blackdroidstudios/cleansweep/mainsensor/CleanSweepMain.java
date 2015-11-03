@@ -77,7 +77,7 @@ public class CleanSweepMain
 			//Step 2
 			//If everything went well with the battery-n-dirt check up, let's move!
 			movementSensor.Move();
-			
+			dirtSensor.cleanTile(movementSensor.getCurrentTile());
 			guiControl.refreshGUI();
 			
 			tempCount++;

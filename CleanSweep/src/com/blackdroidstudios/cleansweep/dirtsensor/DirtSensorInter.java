@@ -34,6 +34,7 @@ public interface DirtSensorInter
 	 */
 	public String registerCell();
 	
+	public void cleanTile(Tile _tile);
 	
 	/**
 	 * Cleaning function of dirt sensor.  Removes one unit of dirt and registers cell as dirty if a unit remains.

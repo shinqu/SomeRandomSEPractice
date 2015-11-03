@@ -13,7 +13,10 @@ public class GUIObserver
 	
 	public static void refreshPanel()
 	{
-		panel.refreshScreen();
+		if(panel != null)
+		{
+			panel.refreshScreen();
+		}
 	}
 	
 	public static void registerPanel(GUIPanel _panel)
@@ -36,7 +39,11 @@ public class GUIObserver
 	 */
 	public static void updateCleanSweepPos(Tile _tile)
 	{
-		panel.updateCSPos(_tile);
+		if(panel != null)
+		{
+			panel.updateCSPos(_tile);
+		}
+		
 	}
 	
 	
