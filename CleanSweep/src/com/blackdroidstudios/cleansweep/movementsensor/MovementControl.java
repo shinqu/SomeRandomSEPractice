@@ -116,4 +116,19 @@ public class MovementControl
 	{
 		return map.getOpenTiles();
 	}
+	
+	/**
+	 * Accessor for MovementMap findReturnPath() method
+	 * @return ArrayList<Tile>
+	 * @param tile from, tile to
+	 */
+	public ReturnPathCarrier chooseCS(Tile from){
+		return map.chooseCS(from);
+	}
+	
+	public void setCurrentTile(Tile t){
+		this.currentTile = t;
+		GUIObserver.updateCleanSweepPos(currentTile);
+	}
+	
 }

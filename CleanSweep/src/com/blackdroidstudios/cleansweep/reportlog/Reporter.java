@@ -17,11 +17,10 @@ public class Reporter {
 	
 	Reporter() {}
 	
-	private int batteryCharge;
+	private long batteryCharge;
 	private int currentLocX;
 	private int currentLocY;
 	private int currentDirtLvl;
-	private String customReport;  //added variable to hold custom messages
 	private boolean isCharging;
 	private boolean isCleaning;
 	private floorType currentFlrType;
@@ -33,7 +32,7 @@ public class Reporter {
 		return instance;
 	}
 	
-	public void setCurrentBattery(int charge)
+	public void setCurrentBattery(long charge)
 	{
 		this.batteryCharge = charge;
 	}
@@ -58,7 +57,7 @@ public class Reporter {
 		this.currentFlrType = flrType;
 	}
 	
-	public int getCurrentBattery()
+	public long getCurrentBattery()
 	{
 		return batteryCharge;
 	}
@@ -83,10 +82,5 @@ public class Reporter {
 		return ("Clean Sweep is currently at " + 
 				Reporter.getInstance().currentLocX + "," + Reporter.getInstance().currentLocY +
 				"\n with a battery level of: " + Reporter.getInstance().batteryCharge);
-	}
-	
-	public String printGUI(String input) {  //added method to print custom messages to GUI report log
-		customReport = input;
-		return (Reporter.getInstance().customReport);
 	}
 }

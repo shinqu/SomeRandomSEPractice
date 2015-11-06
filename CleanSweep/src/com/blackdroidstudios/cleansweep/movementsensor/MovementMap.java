@@ -105,12 +105,19 @@ public class MovementMap
 	/**
 	 * This method will return a path to the nearest charging station available
 	 */
-	public void returnToCS()
+	ReturnPathCarrier chooseCS(Tile current)
 	{
+		ReturnPathCarrier returnMe = null;
+		ReturnPathCarrier useMe = null;
+		//System.out.println("Number of charging stations: " + chargingStations.size());
 		for(Tile _cs : chargingStations)
 		{
-			
+			useMe = findReturnPath(current, _cs, current.getFloorType());
+			if(returnMe == null){returnMe = useMe;
+			if(!(returnMe == null) && useMe.getCost() < returnMe.getCost()){returnMe = useMe;}
+			}
 		}
+		return returnMe;
 	}
 	
 	
@@ -233,5 +240,113 @@ public class MovementMap
 	}
 	
 	
+	/**
+	 * Method to calculate shortest return path to the charging station. From represents tile cleansweep is currently
+	 * occupying. To represents the charging station. Uses a large number of temporary variables. Curr is the floortype 
+	 * of the current Tile. 
+	 * @param from
+	 * @param to
+	 * @param curr
+	 * @return ArrayList<Tile> 
+	 */
+	ReturnPathCarrier findReturnPath(Tile from, Tile to, floorType curr){
+		ReturnPathCarrier path = new ReturnPathCarrier();
+		int xGoal = to.getX();
+		int xCurr = from.getX();
+		int yGoal = to.getY();
+		int yCurr = from.getY();
+		int xDir = xGoal - xCurr;
+		int yDir = yGoal - yCurr;
+		if(xDir < 0){xDir = -1;}
+		if(xDir > 0){xDir = 1;}
+		if(yDir < 0){yDir = -1;}
+		if(yDir > 0){yDir = 1;}
+		boolean atGoal = false;
+		if(xCurr == xGoal && yCurr == yGoal){atGoal = true;} //Safety for initial move of cleansweep, where the current tile is the charging station.
+		floorType currFloor = curr;
+		
+		while(atGoal == false){
+			int xMove = xCurr + xDir;
+			int yMove = yCurr + yDir;
+			Tile tempX = null;
+			Tile tempY = null;   // <--Both tempX and tempY should reset to null each runthrough of the while loop.
+			Tile trueTemp = null;
+			for(int i = 0; i < visitedTiles.size(); i++){
+				trueTemp = visitedTiles.get(i);
+				//check if x + dir exists
+				if(trueTemp.getX() == xMove && trueTemp.getY() == yCurr && xCurr != xGoal){tempX = trueTemp;}
+				//check if y + dir exists
+				if(trueTemp.getX() == xCurr && trueTemp.getY() == yMove && yCurr != yGoal){tempY = trueTemp;}
+				//if both exist, smaller move cost first
+			}
+			if(tempX != null && tempY != null){
+				long costYmove = moveCost(tempX.getFloorType(), currFloor);
+				long costXmove = moveCost(tempY.getFloorType(), currFloor);
+				long math = costYmove - costXmove;
+				if(math < 0){       //Y move is cheaper
+					path.addTile(tempY);
+					path.setCost(costYmove);
+					yCurr = yCurr + yDir;
+					currFloor = tempY.getFloorType();
+				}
+				if(math > 0){       //X move is cheaper
+					path.addTile(tempX);
+					path.setCost(costXmove);
+					xCurr = xCurr + xDir;
+					currFloor = tempX.getFloorType();
+				}
+				else{  
+					path.addTile(tempX); //cost is equal, choose X move by default
+					path.setCost(costXmove);
+					xCurr = xCurr + xDir;
+					currFloor = tempX.getFloorType();
+				}
+			}
+			//if only one exists, just choose that one
+			if(tempX != null && tempY == null){
+				path.addTile(tempX);
+				path.setCost(moveCost(currFloor, tempX.getFloorType()));
+				xCurr = xCurr + xDir;
+				currFloor = tempX.getFloorType();
+			}
+			if(tempY != null && tempX == null){
+				path.addTile(tempY);
+				path.setCost(moveCost(currFloor, tempY.getFloorType()));
+				yCurr = yCurr + yDir;
+				currFloor = tempY.getFloorType();
+			}
+			if(xCurr == xGoal && yCurr == yGoal){atGoal = true;} //have we reached the charging station coordinates?
+		}
+		return path;
+	}
+	
+	
+	private long moveCost(floorType from, floorType to){
+		long cost = 0;
+		switch(from)
+		{
+		case Plain:
+			cost += 1;
+		case LowCarpet:
+			cost+= 2;
+		case HighCarpet:
+			cost+=3;
+		case ChargingStation:
+			cost+=0;	
+		}
+		switch(to)
+		{
+		case Plain:
+			cost+=1;
+		case LowCarpet:
+			cost+=2;
+		case HighCarpet:
+			cost+=3;
+		case ChargingStation:
+			cost+=0;
+		}
+		cost = cost/2;
+		return cost;
+	}
 	
 }

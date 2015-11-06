@@ -12,6 +12,7 @@ class Sensor implements SurfaceSensor
 {
 	private Tile current;
 	private Tile previous;
+	private Tile chargingStation;
 		
 	Sensor(Tile current)
 	{
@@ -59,13 +60,12 @@ class Sensor implements SurfaceSensor
 		this.current.addNeighbour(s);
 	}
 
-	/**
-	 * FILL THIS IN!!!!!!!!!
-	 */
-	public void registerMove(int x, int y) 
+
+	public void registerMove(Tile t) 
 	{
-		// TODO Auto-generated method stub
-		
+		Tile temp = this.current;
+		this.current = t;
+		this.previous= temp;
 	}
 	
 	/**
@@ -91,6 +91,18 @@ class Sensor implements SurfaceSensor
 		default:
 			return -1;
 		}
+	}
+
+	public floorType getCurrentFloorType() {
+		return this.current.getFloorType();
+	}
+
+	public void setChargingStation(Tile t) {
+		this.chargingStation = t;
+	}
+
+	public Tile getChargingStation() {
+		return this.chargingStation;
 	}
 	
 	

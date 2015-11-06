@@ -7,8 +7,8 @@ import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 
 public class Battery 
 {	
-	private static int batteryCharge = 100;
-	private int batteryLoss = 0;
+	private static long batteryCharge = 100;
+	private long batteryLoss = 0;
 	private floorType myCurrentFloor;
 	
 	
@@ -20,21 +20,13 @@ public class Battery
 	default:			return null;
 	}*/
 	
-	void move(floorType from, floorType to)
+	/*
+	 * This calculation logic was already contained in SurfaceSensor, it only needs to be called from there.
+	 */
+	public void move(int from, int to)
 	{
-		if (from == floorType.Plain)
-			batteryLoss ++;
-		else if (from == floorType.LowCarpet)
-			batteryLoss += 2;
-		else if (from == floorType.HighCarpet)
-			batteryLoss += 3;
-		
-		if (to == floorType.Plain)
-			batteryLoss ++;
-		else if (to == floorType.LowCarpet)
-			batteryLoss += 2;
-		else if (to == floorType.HighCarpet)
-			batteryLoss += 3;
+		batteryLoss += from;
+		batteryLoss += to;
 		
 		batteryLoss = batteryLoss / 2;
 		batteryCharge -= batteryLoss;
@@ -48,7 +40,11 @@ public class Battery
 			batteryCharge = 100;
 	}
 	
-	public static int getCharge()
+	public void setMyCurrentFloor(floorType f){
+		this.myCurrentFloor = f;
+	}
+	
+	public static long getCharge()
 	{
 		return batteryCharge;
 	}
