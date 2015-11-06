@@ -1,13 +1,8 @@
 package com.blackdroidstudios.cleansweep.dirtsensor;
 
-import com.blackdroidstudios.cleansweep.map.Floor;
-import com.blackdroidstudios.cleansweep.map.Tile.floorType;
-import com.blackdroidstudios.cleansweep.map.Tile.tileType;
-import com.blackdroidstudios.cleansweep.*;
-import com.blackdroidstudios.cleansweep.gui.*;
+
 import com.blackdroidstudios.cleansweep.map.*;
-import com.blackdroidstudios.cleansweep.movementsensor.*;
-import com.blackdroidstudios.cleansweep.surfacesensor.*;
+
 
 /**
  * Interface to be used as main methods for DirtSensor class
@@ -16,6 +11,7 @@ import com.blackdroidstudios.cleansweep.surfacesensor.*;
  */
 public interface DirtSensorInter 
 {
+	
 	
 	/**
 	 * Method used to check if dirt is contained on a tile. Updates private variable dirtDetected with
@@ -32,7 +28,8 @@ public interface DirtSensorInter
 	 * Implements cleanCheck logic to print to Tile to display whether clean or dirty.  Can possibly add
 	 * color coding to simulation.  
 	 */
-	public String registerCell();
+	public void registerCell();
+	
 	
 	public void cleanTile(Tile _tile);
 	

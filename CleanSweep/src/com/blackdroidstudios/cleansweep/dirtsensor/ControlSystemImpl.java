@@ -1,8 +1,9 @@
 package com.blackdroidstudios.cleansweep.dirtsensor;
 
-import com.blackdroidstudios.cleansweep.movementsensor.MovementControl;
-import com.blackdroidstudios.cleansweep.movementsensor.MovementMap;
+
+import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
+import com.blackdroidstudios.cleansweep.map.Tile;
 
 
 /**
@@ -15,18 +16,38 @@ public class ControlSystemImpl implements ControlSystem
 {
 	private int dirtHolder;
 	private boolean holderFull;  //EmptyMe Indicator ???
+	private static DirtSensor dirtSensor;
+	private Tile tile;
+	private int tileDirt;
 	
 	/**
 	 * Constructor for ControlSystemImpl.  Passes DirtSensor instance as parameter,
 	 * Initializes dirtHolder to 0 and holder boolean to false.
 	 */
-	public ControlSystemImpl(DirtSensor ds) 
+	public ControlSystemImpl() 
 	{
-		//this.ds = ds;
 		dirtHolder = 0;
 		holderFull = false;
 		
 	}
+	
+	
+	/**
+	 * Allows Control System to utilize dirt sensor capabilities
+	 * @param ds sets dirtSensor ControlSystem class to this parameter
+	 */
+	public void setDirtSensor(DirtSensor ds) {
+		dirtSensor = ds;
+	}
+	
+	/**
+	 * Gets amount in dirtHolder
+	 * @return int dirtHolder
+	 */
+	public int getDirtHolder(){
+		return dirtHolder;
+	}
+	
 	
 	/**
 	 * Checks to see if dirtHolder if full or not. True if full, false if < 50 units
@@ -39,27 +60,38 @@ public class ControlSystemImpl implements ControlSystem
 		}
 		else {
 			holderFull = true;
-			System.out.println("CleanSweep needs to empty dirt holder");
-			//emptyHolder();
+			Reporter.getInstance().printGUI("CleanSweep needs to empty dirt holder");
 		}
 		return holderFull;
+	}
+	
+	public int setTileDirt() {
+		tileDirt = dirtSensor.detectDirt(tile);
+		return tileDirt;
 	}
 	
 	/**
 	 * Subtracts one unit of dirt from tile and adds one unit of dirt to dirtHolder
 	 */
 	public void removeDirt(){
-		//ds.dirtDetected -= 1;
+		if (tileDirt == 0) {
+			Reporter.getInstance().printGUI("All dirt has been cleaned from tile");
+		}
+		else {
+		tileDirt -= 1;
 		dirtHolder += 1;
-		System.out.println("CleanSweep has removed a unit of dirt from tile");
+		Reporter.getInstance().printGUI("CleanSweep has removed a unit of dirt from tile");
+		}
 	}
+	
+	
 	
 	/**
 	 * To be used when dirtHolder > 50.  Should be implemented through logic sequence
 	 */
 	public void emptyDirtHolder() 
-	{
-			//MovementMap.returnToCS();  
+	{  
+			
 			dirtHolder = 0; 
 	}
 	
@@ -70,28 +102,13 @@ public class ControlSystemImpl implements ControlSystem
 	 */
 	public void cleanUp() 
 	{ 
-		/*ds.cleanCheck(MovementControl.getCurrentTile());
 		holderCheck();
-		do {
-			removeDirt();
-		}
-		while (!ds.cleanState  && !holderFull);
-	
-		if (!ds.cleanState && holderFull) {
-			MovementMap.registerOpenTiles(MovementControl.getCurrentTile());
-			emptyDirtHolder();
-		}
+		getDirtHolder();
 		
-		else if(ds.cleanState && !holderFull) {
-			MovementControl.move();
-			ds.cleanCheck(MovementControl.getCurrentTile());
-			holderCheck();
+			while (tileDirt >= 0 && dirtHolder < 50)  {
+			removeDirt();
+		}	
+		Reporter.getInstance().printGUI("There is no dirt to clean or dirt holder is full!");
 		}
-		else {
-			emptyDirtHolder();
-		}*/
-	}
 	
-	
-
 }

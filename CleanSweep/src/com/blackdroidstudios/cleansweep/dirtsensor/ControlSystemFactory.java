@@ -1,6 +1,5 @@
 package com.blackdroidstudios.cleansweep.dirtsensor;
 
-import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
 
 /**
  * ControlSystemFactory class used to create instance of ControlSystem object. Parameter of DirtSensor objects helps to tie 
@@ -11,10 +10,9 @@ import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
 public class ControlSystemFactory 
 {
 		
-		public static ControlSystem createControlSystem(DirtSensor ds) //Not sure if correct way to bring together both classes
+		public static ControlSystem createControlSystem() //Not sure if correct way to bring together both classes
 		{
-			ControlSystem cs = new ControlSystemImpl(ds);
-			return cs;
+			return new ControlSystemImpl();
 		}
 
 }

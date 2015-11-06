@@ -9,8 +9,13 @@ package com.blackdroidstudios.cleansweep.dirtsensor;
 public interface ControlSystem 
 {
 	
+	public void setDirtSensor(DirtSensor ds);
+	
+	public int getDirtHolder();
 	
 	public boolean holderCheck ();
+	
+	public int setTileDirt();
 	
 	public void removeDirt();
 	

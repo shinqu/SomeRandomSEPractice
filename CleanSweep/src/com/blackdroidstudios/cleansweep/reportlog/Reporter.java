@@ -21,6 +21,7 @@ public class Reporter {
 	private int currentLocX;
 	private int currentLocY;
 	private int currentDirtLvl;
+	private String customReport;  //added variable to hold custom messages
 	private boolean isCharging;
 	private boolean isCleaning;
 	private floorType currentFlrType;
@@ -82,5 +83,10 @@ public class Reporter {
 		return ("Clean Sweep is currently at " + 
 				Reporter.getInstance().currentLocX + "," + Reporter.getInstance().currentLocY +
 				"\n with a battery level of: " + Reporter.getInstance().batteryCharge);
+	}
+	
+	public String printGUI(String input) {  //added method to print custom messages to GUI report log
+		customReport = input;
+		return (Reporter.getInstance().customReport);
 	}
 }
