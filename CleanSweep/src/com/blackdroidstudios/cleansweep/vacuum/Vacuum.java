@@ -1,13 +1,8 @@
-package com.blackdroidstudios.cleansweep.dirtsensor;
+package com.blackdroidstudios.cleansweep.vacuum;
 
+import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
 
-/**
- * ControlSystem Interface used as blueprint for all ControlSystem types.  
- * @author brooney
- *
- */
-public interface ControlSystem 
-{
+public interface Vacuum {
 	
 	public void setDirtSensor(DirtSensor ds);
 	
@@ -23,5 +18,4 @@ public interface ControlSystem
 	
 	public void cleanUp();
 	
-
 }

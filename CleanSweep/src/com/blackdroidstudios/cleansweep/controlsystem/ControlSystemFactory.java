@@ -1,5 +1,4 @@
-package com.blackdroidstudios.cleansweep.dirtsensor;
-
+package com.blackdroidstudios.cleansweep.controlsystem;
 
 /**
  * ControlSystemFactory class used to create instance of ControlSystem object. Parameter of DirtSensor objects helps to tie 
