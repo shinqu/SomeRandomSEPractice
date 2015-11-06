@@ -1,0 +1,9 @@
+diff a/CleanSweep/src/com/blackdroidstudios/cleansweep/gui/GUIFrame.java b/CleanSweep/src/com/blackdroidstudios/cleansweep/gui/GUIFrame.java	(rejected hunks)
+@@ -41,7 +41,6 @@
+ 		});
+ 		
+ 		frame.setResizable(false);
+-		
+ 		//Show the Frame
+ 		frame.setVisible(true);
+ 	}
