@@ -113,7 +113,7 @@ public class MovementMap
 		for(Tile _cs : chargingStations)
 		{
 			useMe = findReturnPath(current, _cs, current.getFloorType());
-			if(returnMe == null){returnMe = useMe;
+			if(returnMe == null){returnMe = useMe;}
 			if(!(returnMe == null) && useMe.getCost() < returnMe.getCost()){returnMe = useMe;}
 			}
 		}
@@ -122,7 +122,7 @@ public class MovementMap
 	
 	
 	/**
-	 * <p>DO NOT EDIT THIS!!!! (Yes, you!! ò.ó) If you do, I'll find you and hit you with the Warhammer 40k 6th. Ed. Hardcover Rulebook.</p>
+	 * <p>DO NOT EDIT THIS!!!! (Yes, you!! Ã².Ã³) If you do, I'll find you and hit you with the Warhammer 40k 6th. Ed. Hardcover Rulebook.</p>
 	 * <p>This is the function that will magically find you a path between the current tile, and the destination.</p>
 	 * @param _startingTile The tile you are in right now
 	 * @param _goalTile The Tile you want to get to
