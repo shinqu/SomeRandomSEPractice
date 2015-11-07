@@ -149,7 +149,7 @@ public class DirtSensor implements DirtSensorInter  {
 		if(_tile.getDirt() > 0)
 		{
 			Floor _f = (Floor)_tile;
-			_f.cleanFloor();
+			_f.cleanFloor(_tile.getDirt());
 		}
 	}
 }

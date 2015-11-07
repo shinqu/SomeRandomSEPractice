@@ -75,13 +75,31 @@ public class MovementMap
 				openTiles.remove(_newTile);
 			}
 			
-			if(_newTile.getFloorType() == floorType.ChargingStation)
+			if(_newTile.getFloorType() == floorType.ChargingStation && !chargingStations.contains(_newTile))
 			{
 				chargingStations.add(_newTile);
 			}
 		}	
 		
 	}
+	/**
+	 * Use this to add a new tile to the Open list. (Don't worry, if the tile is already in the list, it won't be added)
+	 * @param _newTile The tile to be registered
+	 */
+	public void registerOpen(Tile _tile)
+	{
+		if(!openTiles.contains(_tile) && !visitedTiles.contains(_tile))
+		{
+			openTiles.add(_tile);
+			GUIObserver.addNewTile(_tile);
+			
+			if(_tile.getFloorType() == floorType.ChargingStation && !chargingStations.contains(_tile))
+			{
+				chargingStations.add(_tile);
+			}
+		}
+	}
+	
 	/**
 	 * This function will help us record open adjascent tiles, so if we ever get stuck, we can always go back to the nearest one.
 	 * In the event there are no more open tiles, it means we have recorded ALL of the floor.

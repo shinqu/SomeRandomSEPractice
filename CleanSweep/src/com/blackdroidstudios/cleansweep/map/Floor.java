@@ -188,9 +188,13 @@ public class Floor implements Tile
 	/**
 	 * Simple function that will allow the Dirt sensor to erase all dirt from the current Tile
 	 */
-	public void cleanFloor()
+	public void cleanFloor(int _clean)
 	{
-		this.dirt = 0;
+		this.dirt -= _clean;
+		if(this.dirt < 0)
+		{
+			this.dirt = 0;
+		}
 	}
 	
 }
