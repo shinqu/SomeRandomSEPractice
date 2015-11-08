@@ -55,7 +55,7 @@ public class MovementControl
 			}else
 			{
 				//There are no open neighbours, return to the nearest possible!
-				
+				path = map.findOpenTile(currentTile);
 			}
 		}else
 		{

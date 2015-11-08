@@ -25,6 +25,13 @@ public class FloorMap
 		map = floorGen.generateEmptyMap();
 	}
 	
+	public Tile[][] generateMap()
+	{
+		map = floorGen.generateMap();
+		
+		return map;
+	}
+	
 	public Tile[][] getMap()
 	{
 		return map;

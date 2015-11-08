@@ -69,10 +69,7 @@ public class CleanSweepMain
 			
 			//Step 1
 			//Check battery and dirt levels
-			if(tempCount > 60)
-			{
-				break;
-			}
+			
 			
 			//Step 2
 			//If everything went well with the battery-n-dirt check up, let's move!
@@ -80,8 +77,8 @@ public class CleanSweepMain
 			dirtSensor.cleanTile(movementSensor.getCurrentTile());
 			guiControl.refreshGUI();
 			
-			tempCount++;
-			Thread.sleep(500);
+			//tempCount++;
+			Thread.sleep(250);
 		}
 	}
 	

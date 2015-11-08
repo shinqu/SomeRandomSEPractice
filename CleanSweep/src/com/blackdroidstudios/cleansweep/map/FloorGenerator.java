@@ -46,12 +46,20 @@ public class FloorGenerator
 					Random rnd = new Random();//To be removed
 					newMap[_x][_y] = new Floor(_x, _y, floorType.Plain, Color.LIGHT_GRAY, rnd.nextInt(10) - 7);
 				}
-				
 			}
 		}
+		addNeighbours(newMap);
 		
+		return newMap;
+	}
+	
+	public Tile[][] generateMap()
+	{
+		Tile[][] newMap = new Tile[FloorMap.FLOOR_SIZE_X][FloorMap.FLOOR_SIZE_Y];
 		
+		MapReader mr = new MapReader();
 		
+		newMap = mr.readMap();
 		
 		addNeighbours(newMap);
 		

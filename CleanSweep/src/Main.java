@@ -12,7 +12,7 @@ public class Main
 	public static void main(String[] args) throws Exception
 	{
 		floorGen = new FloorGenerator();
-		Tile[][] newMap = floorGen.generateEmptyMap();
+		Tile[][] newMap = floorGen.generateMap();
 		cleanSweep = new CleanSweepMain();
 		cleanSweep.startVacuum(newMap[0][0]);
 	}

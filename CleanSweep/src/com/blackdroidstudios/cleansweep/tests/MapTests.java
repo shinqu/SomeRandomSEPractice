@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.blackdroidstudios.cleansweep.map.FloorMap;
 import com.blackdroidstudios.cleansweep.map.Tile;
 import com.blackdroidstudios.cleansweep.map.Tile.floorType;
+import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 
 public class MapTests
 {
@@ -55,6 +56,24 @@ public class MapTests
 			FloorMap map = new FloorMap();
 			Tile[][] testMap = map.getMap();
 			assertEquals(testMap[0][0].getFloorType(), floorType.ChargingStation);
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	@Test 
+	public void TestNewMap()
+	{
+		try
+		{
+			FloorMap map = new FloorMap();
+			Tile[][] testMap = map.generateMap();
+			assertEquals(testMap[0][0].getFloorType(), floorType.ChargingStation);
+			assertEquals(testMap[1][0].getFloorType(), floorType.LowCarpet);
+			assertEquals(testMap[5][0].getTileType(), tileType.Impassable);
+			assertEquals(testMap[4][8].getFloorType(), floorType.Plain);
 		}
 		catch(Exception e)
 		{

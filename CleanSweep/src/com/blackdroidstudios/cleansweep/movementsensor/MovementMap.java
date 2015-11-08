@@ -131,6 +131,31 @@ public class MovementMap
 		}
 	}
 	
+	public ArrayList<Tile> findOpenTile(Tile _tile)
+	{
+		ArrayList<Tile> tList = new ArrayList<Tile>();
+		
+		Tile tTile = null;
+		
+		for(Tile _t : openTiles)
+		{
+			if(tTile != null)
+			{
+				if(getFCost(_tile, _tile, _t) < getFCost(_tile, _tile, tTile))
+				{
+					tTile = _t;
+				}
+			}else
+			{
+				tTile = _t;
+			}
+		}
+		
+		tList = findPath(_tile, tTile);
+		
+		return tList;
+	}
+	
 	
 	/**
 	 * <p>DO NOT EDIT THIS!!!! (Yes, you!! ò.ó) If you do, I'll find you and hit you with the Warhammer 40k 6th. Ed. Hardcover Rulebook.</p>
@@ -160,7 +185,7 @@ public class MovementMap
 			{
 				if(selectedTile != null)
 				{
-					if(getFCost(_t, _startingTile, _goalTile) < getFCost(_t, _startingTile, _goalTile))
+					if(getFCost(_t, _startingTile, _goalTile) < getFCost(selectedTile, _startingTile, _goalTile))
 					{
 						selectedTile = _t;
 					}
@@ -192,8 +217,6 @@ public class MovementMap
 					openList.add(_t);
 				}
 			}
-			
-					
 		}
 		
 		return finalPath;
@@ -213,14 +236,19 @@ public class MovementMap
 		if(!_foundPath.isEmpty())
 		{
 			finalPath.add(_goal);
+			Tile curr = _goal;
 			for(Tile _t : _foundPath)
 			{
-				for(Tile _n : _t.getNeighbours())
+				if(_t != curr)
 				{
-					if(finalPath.contains(_n))
+					for(Tile _n : _t.getNeighbours())
 					{
-						finalPath.add(_t);
-						break;
+						if(finalPath.contains(_n) && _n == curr && !finalPath.contains(_t))
+						{
+							finalPath.add(_t);
+							curr = _t;
+							break;
+						}
 					}
 				}
 			}

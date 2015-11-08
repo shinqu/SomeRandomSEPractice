@@ -123,7 +123,7 @@ public class GUIPanel extends JPanel
 		{
 			for (int y = 0; y < FloorMap.FLOOR_SIZE_Y; y++) 
 			{
-				_g2d.setColor(Color.DARK_GRAY);
+				_g2d.setColor(Color.BLACK);
 				_g2d.fillRect(floorMap[x][y].x, floorMap[x][y].y, floorMap[x][y].width, floorMap[x][y].height);
 			}
 		}

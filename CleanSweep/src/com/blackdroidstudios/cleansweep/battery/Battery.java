@@ -8,44 +8,44 @@ import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 public class Battery 
 {	
 	private static int batteryCharge = 100;
-	private int batteryLoss = 0;
 	private floorType myCurrentFloor;
 	
-	
-	/*switch(myCurrentFloor)
+	public void moveCost(Tile from, Tile to)
 	{
-	case Plain: 		batteryCharge--;
-	case LowCarpet:		batteryCharge -= 2;
-	case HighCarpet:	batteryCharge -= 3;
-	default:			return null;
-	}*/
-	
-	void move(floorType from, floorType to)
-	{
-		if (from == floorType.Plain)
-			batteryLoss ++;
-		else if (from == floorType.LowCarpet)
-			batteryLoss += 2;
-		else if (from == floorType.HighCarpet)
-			batteryLoss += 3;
-		
-		if (to == floorType.Plain)
-			batteryLoss ++;
-		else if (to == floorType.LowCarpet)
-			batteryLoss += 2;
-		else if (to == floorType.HighCarpet)
-			batteryLoss += 3;
-		
-		batteryLoss = batteryLoss / 2;
+		int batteryLoss = ((getTileCost(from) + getTileCost(to))/2);
 		batteryCharge -= batteryLoss;
-		batteryLoss = 0;
 		updateReport();
+	}
+	public static int getCost(Tile from, Tile to)
+	{
+		return ((getTileCost(from) + getTileCost(to))/2);
+	}
+	
+	public static int getTileCost(Tile _t)
+	{
+		int result = 0;
+		switch(_t.getFloorType())
+		{
+		case Plain:
+		case ChargingStation:
+			result = 1;
+			break;
+		case LowCarpet:
+			result = 2;
+			break;
+		case HighCarpet:
+			result = 3;
+			break;
+		}
+		return result;
 	}
 	
 	public void chargeCS()
 	{
 		if (myCurrentFloor == floorType.ChargingStation)
+		{
 			batteryCharge = 100;
+		}
 	}
 	
 	public static int getCharge()
