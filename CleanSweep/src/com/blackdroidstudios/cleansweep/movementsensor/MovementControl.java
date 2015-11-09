@@ -139,6 +139,11 @@ public class MovementControl
 		return map.getOpenTiles();
 	}
 	
+	public void registerDirtyTile(Tile _tile)
+	{
+		
+	}
+	
 	public void returnToCS()
 	{
 		if(!returningToCS)

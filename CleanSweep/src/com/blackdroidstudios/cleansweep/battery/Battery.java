@@ -12,7 +12,6 @@ import com.blackdroidstudios.cleansweep.reportlog.Reporter;
 public class Battery 
 {	
 	private static int batteryCharge = 100;
-	private floorType myCurrentFloor;
 	
 	public void chargeCS()
 	{

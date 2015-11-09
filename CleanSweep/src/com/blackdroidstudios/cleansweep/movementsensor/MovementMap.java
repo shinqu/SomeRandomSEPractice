@@ -128,6 +128,11 @@ public class MovementMap
 				obstacleTiles.add(_t);
 				GUIObserver.addNewTile(_t);
 			}
+			
+			if(_t.getFloorType() == floorType.ChargingStation && !chargingStations.contains(_t))
+			{
+				chargingStations.add(_t);
+			}
 		}
 	}
 	/**
@@ -301,6 +306,11 @@ public class MovementMap
 	private int getHCost(Tile _current, Tile _goal)
 	{
 		return ((Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY())) + surfaceSensor.getTileCost(_current));
+	}
+	
+	public void registerDirtyTile(Tile _tile)
+	{
+		dirtyTiles.add(_tile);
 	}
 	
 	

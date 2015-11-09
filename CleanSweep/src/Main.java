@@ -14,7 +14,8 @@ public class Main
 		floorGen = new FloorGenerator();
 		Tile[][] newMap = floorGen.generateMap();
 		cleanSweep = new CleanSweepMain();
-		cleanSweep.startVacuum(newMap[0][0]);
+		//cleanSweep.startVacuum(newMap[0][0]);
+		cleanSweep.startVacuum(newMap[4][14]);
 	}
 	
 }

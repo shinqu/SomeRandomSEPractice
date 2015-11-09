@@ -1,6 +1,5 @@
 package com.blackdroidstudios.cleansweep.dirtsensor;
 
-
 import com.blackdroidstudios.cleansweep.map.*;
 
 

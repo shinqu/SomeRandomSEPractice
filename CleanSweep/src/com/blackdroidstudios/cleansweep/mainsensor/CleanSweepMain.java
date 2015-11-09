@@ -54,7 +54,6 @@ public class CleanSweepMain
 	
 	public void onUpdate() throws InterruptedException
 	{
-		int tempCount = 0;
 		//Continue to operate, until we've visited ALL the floor
 		while(!movementSensor.getOpenTiles().isEmpty())
 		{
@@ -80,6 +79,10 @@ public class CleanSweepMain
 			if(!dirtSensor.cleanCheck(movementSensor.getCurrentTile()))
 			{
 				movementSensor.returnToCS();
+				movementSensor.registerDirtyTile(movementSensor.getCurrentTile());
+			}else
+			{
+				
 			}
 			
 			//Step 3: check if we are in a charging Station!
@@ -91,7 +94,19 @@ public class CleanSweepMain
 			
 			guiControl.refreshGUI();
 			
-			//tempCount++;
+			Thread.sleep(250);
+		}
+		
+		while(movementSensor.getCurrentTile().getFloorType() != floorType.ChargingStation)
+		{
+			movementSensor.returnToCS();
+			movementSensor.Move();
+			if(movementSensor.getCurrentTile().getFloorType() == floorType.ChargingStation)
+			{
+				battery.chargeCS();
+				dirtSensor.dumpDirt();
+			}
+			guiControl.refreshGUI();
 			Thread.sleep(250);
 		}
 	}
