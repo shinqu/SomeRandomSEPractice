@@ -19,9 +19,7 @@ public class DirtSensor implements DirtSensorInter  {
 	//Static
 	public static final int DIRT_MAX_CAPACITY = 50;
 	
-	private int dirtDetected;
 	public boolean cleanState;
-	private Tile currentTile;
 	private int currentStorage;
 	public boolean stopCleaning;
 	//private ArrayList<Tile> dirtyTiles = new ArrayList<Tile>();
@@ -32,124 +30,69 @@ public class DirtSensor implements DirtSensorInter  {
 	 */
 	public DirtSensor()
 	{
-		dirtDetected = 0;
 		cleanState = true;
-		currentTile = null;
-	//	dirtyTiles.add(com.blackdroidstudios.cleansweep.map.FloorGenerator.generateEmptyMap());  // Not sure what I want to do here
 	}
 
 	/**
 	 * Method used to check if dirt is contained on a tile. Updates private variable dirtDetected with
 	 * how many units of dirt are found. 
 	 */
-	public int detectDirt() {
-		dirtDetected = currentTile.getDirt();
-		return dirtDetected;
-	}
-	
-	public int detectDirt(Tile _tile)
+	public int detectDirt(Tile _tile) 
 	{
-		currentTile = _tile;
-		
-		dirtDetected = currentTile.getDirt();
-		
+		int dirtDetected = _tile.getDirt();
 		return dirtDetected;
 	}
 	
 	/**
 	 * Boolean Method to help logic of whether a tile has dirt or not.  
 	 */
-	public boolean cleanCheck() 
+	public boolean cleanCheck(Tile _tile) 
 	{ 
-		detectDirt();  //updates dirtDetected variable
-		if (dirtDetected > 0) 
+		 //updates dirtDetected variable
+		if (detectDirt(_tile) > 0) 
 		{
-			cleanState = false;
+			cleanDirt(_tile);
 		}
 		else 
 		{
-			cleanState = true;	
+			cleanState = true;
 		}
+		Reporter.getInstance().setCurrentDirtLvl(currentStorage);
 		return cleanState;
 	}
-	
-	/**
-	 * Implements cleanCheck logic to print to Tile to display whether clean or dirty.  Can possibly add
-	 * color coding to simulation.  
-	 */
-	public void registerCell() //create array list
-	{  
-		if (cleanState = true) {	
-		cleanedTiles.add(currentTile);	 }
-		
-		else {
-			Reporter.getInstance().printGUI("Cannot Register Dirty Cell as Clean");
-		}
-		
-		
-	}
 
 	@Override
-	public int cleanDirt() 
+	public void cleanDirt(Tile _tile) 
 	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public boolean stopCleaning() {
-		boolean tempStopCleaning;
-
-		// Check if clean sweep has visited every accessible location on the current floor.
-		tempStopCleaning = checkEveryLocIsCleaned();
-		stopCleaning = tempStopCleaning;
-		if (tempStopCleaning == true) {
-			return true;
-		}
-		
-		// Check if 50-unit dirt capacity has been met.
-		if (currentStorage >= 50) {
-			tempStopCleaning = true;
-			return true;
-		}
-			
-		// Check if clean sweep only has enough power remaining to
-		// return to its charging station. See
-		// Power Management for more details.
-		
-		return false;
-	}
-
-	/**
-	 * Checks if clean sweep has visited every accessible location on the
-	 * current floor.
-	 * 
-	 * @return
-	 */
-	public boolean checkEveryLocIsCleaned() {
-		FloorGenerator floor = new FloorGenerator();
-		Tile[][] floorTileCollection = floor.generateEmptyMap();
-
-		boolean tempStopCleaning = true;
-		for (int i = 0; i < FloorMap.FLOOR_SIZE_X; i++) {
-			for (int j = 0; j < FloorMap.FLOOR_SIZE_Y; j++) {
-				Tile tile = floorTileCollection[i][j];
-				if (tile.getDirt() > 0) {
-					tempStopCleaning = false;
-					break;
-				}
-			}
-		}
-		return tempStopCleaning;
-	}
-	@Override
-	public void cleanTile(Tile _tile) 
-	{
-		// TODO Auto-generated method stub
-		if(_tile.getDirt() > 0)
+		Floor _f = (Floor)_tile;
+		if((currentStorage + _tile.getDirt()) <= DIRT_MAX_CAPACITY)
 		{
-			Floor _f = (Floor)_tile;
+			currentStorage += _tile.getDirt();
 			_f.cleanFloor(_tile.getDirt());
+			cleanState = true;
+		}else
+		{
+			cleanState = false;
+		}
+		
+	}
+
+	@Override
+	public void dumpDirt() 
+	{
+		// TODO Auto-generated method stub
+		currentStorage = 0;
+	}
+
+	@Override
+	public boolean isFull() 
+	{
+		if(currentStorage == DIRT_MAX_CAPACITY)
+		{
+			return true;
+		}else
+		{
+			return false;
 		}
 	}
 }

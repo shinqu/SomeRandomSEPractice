@@ -24,49 +24,12 @@ class Sensor implements SurfaceSensor
 		return getValue(current.getFloorType());
 	}
 	
-	public int getPrevious() 
+	public int getTarget() 
 	{
 		return getValue(previous.getFloorType());
 	}
 	
-	public int getNorth() 
-	{
-		return getValue(current.getNorth().getFloorType());
-	}
 	
-	public int getSouth() 
-	{
-		return getValue(current.getSouth().getFloorType());
-	}
-	
-	public int getEast() 
-	{
-		return getValue(current.getEast().getFloorType());
-	}
-	
-	public int getWest() 
-	{
-		return getValue(current.getWest().getFloorType());
-	}
-	
-	public void setCurrent(Tile s) 
-	{
-		this.current = s;
-	}
-	
-	public void setNeighbor(Tile s)
-	{
-		this.current.addNeighbour(s);
-	}
-
-	/**
-	 * FILL THIS IN!!!!!!!!!
-	 */
-	public void registerMove(int x, int y) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/**
 	 * @author Steven Kiley
@@ -91,6 +54,31 @@ class Sensor implements SurfaceSensor
 		default:
 			return -1;
 		}
+	}
+
+	@Override
+	public int getTileCost(Tile _t)
+	{
+		int result = 0;
+		switch(_t.getFloorType())
+		{
+		case Plain:
+		case ChargingStation:
+			result = 1;
+			break;
+		case LowCarpet:
+			result = 2;
+			break;
+		case HighCarpet:
+			result = 3;
+			break;
+		}
+		return result;
+	}
+	
+	public int moveCost(Tile from, Tile to)
+	{
+		return ((getTileCost(from) + getTileCost(to))/2);
 	}
 	
 	

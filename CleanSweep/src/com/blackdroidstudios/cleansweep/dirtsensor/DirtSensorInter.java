@@ -17,29 +17,23 @@ public interface DirtSensorInter
 	 * Method used to check if dirt is contained on a tile. Updates private variable dirtDetected with
 	 * how many units of dirt are found. 
 	 */
-	public int detectDirt() ;
+	public int detectDirt(Tile _tile) ;
 	
 	/**
 	 * Boolean Method to help logic of whether a tile has dirt or not.  
 	 */
-	public boolean cleanCheck() ;
-	
-	/**
-	 * Implements cleanCheck logic to print to Tile to display whether clean or dirty.  Can possibly add
-	 * color coding to simulation.  
-	 */
-	public void registerCell();
+	public boolean cleanCheck(Tile _tile) ;
 	
 	
-	public void cleanTile(Tile _tile);
+	public void dumpDirt();
 	
 	/**
 	 * Cleaning function of dirt sensor.  Removes one unit of dirt and registers cell as dirty if a unit remains.
 	 * Need to figure out algorithm to trace back to cells still containing dirt.
 	 * @return
 	 */
-	public int cleanDirt();
-
-	boolean stopCleaning();
+	public void cleanDirt(Tile _tile);
+	
+	public boolean isFull();
 
 }

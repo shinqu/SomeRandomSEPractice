@@ -69,16 +69,16 @@ public class MapReader
 
 		if(c == PLAIN)
 		{
-			newTile = new Floor(_x, _y, floorType.Plain, Color.LIGHT_GRAY, rnd.nextInt(10) - 8);
+			newTile = new Floor(_x, _y, floorType.Plain, Color.LIGHT_GRAY, rnd.nextInt(10) - 7);
 		}else if(c == WALL || c == STAIRS)
 		{
 			newTile = new Obstacle(_x, _y);
 		}else if(c == LOW_CARPET)
 		{
-			newTile = new Floor(_x, _y, floorType.LowCarpet, Color.GRAY, rnd.nextInt(10) - 7);
+			newTile = new Floor(_x, _y, floorType.LowCarpet, Color.GRAY, rnd.nextInt(10) - 6);
 		}else if(c == HIGH_CARPET)
 		{
-			newTile = new Floor(_x, _y, floorType.HighCarpet, Color.DARK_GRAY, rnd.nextInt(10) - 6);
+			newTile = new Floor(_x, _y, floorType.HighCarpet, Color.DARK_GRAY, rnd.nextInt(10) - 5);
 		}else if(c == CHARGING_STATION)
 		{
 			newTile = new Floor(_x, _y, floorType.ChargingStation, Color.BLUE, 0);

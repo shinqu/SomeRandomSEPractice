@@ -57,6 +57,8 @@ public class GUIConsole extends JPanel
 		_g2d.setFont(Font.getFont("Arial"));
 		_g2d.drawString(TITLE_STRING, 15, 15);
 		_g2d.drawString("Current Position: X:" + Reporter.getInstance().getCurrentLocX() + " Y:" + Reporter.getInstance().getCurrentLocY(), 15, 30);
+		_g2d.drawString("Battery: " + Reporter.getInstance().getCurrentBattery(), 15, 45);
+		_g2d.drawString("Dirt Storage: " + Reporter.getInstance().getCurrentDirtLvl(), 15, 70);
 	}
 	
 	

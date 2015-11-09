@@ -6,15 +6,13 @@ package com.blackdroidstudios.cleansweep.surfacesensor;
 
 import com.blackdroidstudios.cleansweep.map.Tile;
 
-public interface SurfaceSensor {
+public interface SurfaceSensor 
+{
 	int getCurrent();
-	int getPrevious();
-	int getNorth();
-	int getSouth();
-	int getEast();
-	int getWest();
+	int getTarget();
 	
-	void registerMove(int x, int y);
-	void setCurrent(Tile s);
-	void setNeighbor(Tile s);
+	public int getTileCost(Tile _t);
+	public int moveCost(Tile from, Tile to);
+
+
 }

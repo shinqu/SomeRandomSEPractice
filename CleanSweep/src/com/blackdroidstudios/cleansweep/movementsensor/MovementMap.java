@@ -7,6 +7,7 @@ import com.blackdroidstudios.cleansweep.gui.GUIObserver;
 import com.blackdroidstudios.cleansweep.map.Tile;
 import com.blackdroidstudios.cleansweep.map.Tile.floorType;
 import com.blackdroidstudios.cleansweep.map.Tile.tileType;
+import com.blackdroidstudios.cleansweep.surfacesensor.SurfaceSensor;
 
 /**
  * 
@@ -18,18 +19,22 @@ import com.blackdroidstudios.cleansweep.map.Tile.tileType;
 public class MovementMap 
 {
 	//Variables
+	private SurfaceSensor surfaceSensor;
 	private ArrayList<Tile> visitedTiles;
 	private ArrayList<Tile> openTiles;
 	private ArrayList<Tile> chargingStations;
 	private ArrayList<Tile> obstacleTiles;
+	private ArrayList<Tile> dirtyTiles;
 
 	//Default Constructor
-	public MovementMap()
+	public MovementMap(SurfaceSensor _ss)
 	{
+		surfaceSensor = _ss;
 		visitedTiles = new ArrayList<Tile>();
 		openTiles = new ArrayList<Tile>();
 		chargingStations = new ArrayList<Tile>();
 		obstacleTiles = new ArrayList<Tile>();
+		dirtyTiles = new ArrayList<Tile>();
 	}
 	
 	/**
@@ -43,6 +48,11 @@ public class MovementMap
 	public ArrayList<Tile> getOpenTiles()
 	{
 		return openTiles;
+	}
+	
+	public ArrayList<Tile> getDirtyTiles()
+	{
+		return dirtyTiles;
 	}
 	
 	/**
@@ -123,12 +133,24 @@ public class MovementMap
 	/**
 	 * This method will return a path to the nearest charging station available
 	 */
-	public void returnToCS()
+	public ArrayList<Tile> returnToCS(Tile _current)
 	{
+		ArrayList<Tile> fPath = new ArrayList<Tile>();
+		Tile _result = null;
 		for(Tile _cs : chargingStations)
 		{
-			
+			if(_result != null)
+			{
+				if(getDistanceCost(_current, _cs) < getDistanceCost(_current, _result))
+				{
+					_result = _cs;
+				}
+			}else
+			{
+				_result = _cs;
+			}
 		}
+		return findPath(_current, _result);
 	}
 	
 	public ArrayList<Tile> findOpenTile(Tile _tile)
@@ -141,7 +163,7 @@ public class MovementMap
 		{
 			if(tTile != null)
 			{
-				if(getFCost(_tile, _tile, _t) < getFCost(_tile, _tile, tTile))
+				if(getDistanceCost(_tile, _t) < getDistanceCost(_tile, tTile))
 				{
 					tTile = _t;
 				}
@@ -150,9 +172,7 @@ public class MovementMap
 				tTile = _t;
 			}
 		}
-		
 		tList = findPath(_tile, tTile);
-		
 		return tList;
 	}
 	
@@ -263,6 +283,11 @@ public class MovementMap
 		return finalPath;
 	}
 	
+	private int getDistanceCost(Tile _from, Tile _to)
+	{
+		return findPath(_from, _to).size();
+	}
+	
 	private int getFCost(Tile _current, Tile _start, Tile _goal)
 	{
 		return getGCost(_current, _start) + getHCost(_current, _goal);
@@ -270,12 +295,12 @@ public class MovementMap
 	
 	private int getGCost(Tile _current, Tile _start)
 	{
-		return(Math.abs(_current.getX() - _start.getX()) + Math.abs(_current.getY() - _start.getY()));
+		return((Math.abs(_current.getX() - _start.getX()) + Math.abs(_current.getY() - _start.getY())) + surfaceSensor.getTileCost(_current));
 	}
 	
 	private int getHCost(Tile _current, Tile _goal)
 	{
-		return (Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY()));
+		return ((Math.abs(_current.getX() - _goal.getX()) + Math.abs(_current.getY() - _goal.getY())) + surfaceSensor.getTileCost(_current));
 	}
 	
 	
