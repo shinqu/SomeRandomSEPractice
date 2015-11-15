@@ -1,28 +1,23 @@
 package com.blackdroidstudios.cleansweep.controlsystem;
 
-import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
+
+import com.blackdroidstudios.cleansweep.map.*;
 
 /**
  * ControlSystem Interface used as blueprint for all ControlSystem types.  
  * @author brooney
  *
  */
-public interface ControlSystem 
+public interface ControlSystem extends Runnable
 {
 	
-	public void setDirtSensor(DirtSensor ds);
+	public boolean maintainCleanCycle();
 	
-	public int getDirtHolder();
+	public void allLocVisited(); // bring over from DirtSensor
 	
-	public boolean holderCheck ();
+	public boolean dirtRemaining(Tile tile);
 	
-	public int setTileDirt();
-	
-	public void removeDirt();
-	
-	public void emptyDirtHolder();
-	
-	public void cleanUp();
+	public Tile locateChargeStation(Tile tile); // look + 2 tiles in each direction 
 	
 
 }

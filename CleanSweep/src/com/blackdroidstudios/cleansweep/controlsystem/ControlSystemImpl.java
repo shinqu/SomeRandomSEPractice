@@ -2,8 +2,12 @@ package com.blackdroidstudios.cleansweep.controlsystem;
 
 
 import com.blackdroidstudios.cleansweep.reportlog.Reporter;
+import com.blackdroidstudios.cleansweep.battery.Battery;
 import com.blackdroidstudios.cleansweep.dirtsensor.DirtSensor;
 import com.blackdroidstudios.cleansweep.map.Tile;
+import com.blackdroidstudios.cleansweep.surfacesensor.*;
+import com.blackdroidstudios.cleansweep.vacuum.*;
+import com.blackdroidstudios.cleansweep.movementsensor.*;
 
 
 /**
@@ -12,103 +16,78 @@ import com.blackdroidstudios.cleansweep.map.Tile;
  * @author brooney
  *
  */
-public class ControlSystemImpl implements ControlSystem
-{
-	private int dirtHolder;
-	private boolean holderFull;  //EmptyMe Indicator ???
-	private static DirtSensor dirtSensor;
-	private Tile tile;
-	private int tileDirt;
+public class ControlSystemImpl implements ControlSystem {  //broadcast to a gui listener
 	
-	/**
-	 * Constructor for ControlSystemImpl.  Passes DirtSensor instance as parameter,
-	 * Initializes dirtHolder to 0 and holder boolean to false.
-	 */
-	public ControlSystemImpl() 
-	{
-		dirtHolder = 0;
-		holderFull = false;
-		
+	boolean dirtPresent;
+	boolean isChargingStation;
+	boolean cycleComplete;
+	Tile lastChargingStation; 
+	Tile nearestChargingStation;
+	Tile lastTileVisited;
+	int tileMoves;
+	SurfaceSensor sensor;
+	DirtSensor dirtSensor;
+	VacuumImpl vacuum;
+	MovementControl moveControl;
+	MovementMap map;
+	int totalCycles;
+	
+	public enum CycleState {
+		Starting, Active, Paused, Complete
 	}
 	
+	CycleState state;
 	
-	/**
-	 * Allows Control System to utilize dirt sensor capabilities
-	 * @param ds sets dirtSensor ControlSystem class to this parameter
-	 */
-	public void setDirtSensor(DirtSensor ds) {
-		dirtSensor = ds;
-	}
-	
-	/**
-	 * Gets amount in dirtHolder
-	 * @return int dirtHolder
-	 */
-	public int getDirtHolder(){
-		return dirtHolder;
-	}
-	
-	
-	/**
-	 * Checks to see if dirtHolder if full or not. True if full, false if < 50 units
-	 * 
-	 * @return boolean holderFull 
-	 */
-	public boolean holderCheck (){
-		if (dirtHolder < 50) {
-			holderFull = false;
-		}
-		else {
-			holderFull = true;
-			Reporter.getInstance().printGUI("CleanSweep needs to empty dirt holder");
-		}
-		return holderFull;
-	}
-	
-	public int setTileDirt() {
-		tileDirt = dirtSensor.detectDirt(tile);
-		return tileDirt;
-	}
-	
-	/**
-	 * Subtracts one unit of dirt from tile and adds one unit of dirt to dirtHolder
-	 */
-	public void removeDirt(){
-		if (tileDirt == 0) {
-			Reporter.getInstance().printGUI("All dirt has been cleaned from tile");
-		}
-		else {
-		tileDirt -= 1;
-		dirtHolder += 1;
-		Reporter.getInstance().printGUI("CleanSweep has removed a unit of dirt from tile");
-		}
-	}
-	
-	
-	
-	/**
-	 * To be used when dirtHolder > 50.  Should be implemented through logic sequence
-	 */
-	public void emptyDirtHolder() 
-	{  
+	public void cycleChanger(){
+		switch (state) {
+		case Starting: 
+			Reporter.getInstance().printGUI("Clean Sweep cleaning cycle is Starting"); //load instances needed of dirt sensor etc...
+		case Active:
+			Reporter.getInstance().printGUI("Clean Sweep cleaning cycle is Active"); //move, suck up dirt
+			break;
+		case Paused:
+			Reporter.getInstance().printGUI("Clean Sweep cleaning cycle is Paused"); //find nearest cs, return to charging station, return to last tile
+			break;
 			
-			dirtHolder = 0; 
+		case Complete: 
+			Reporter.getInstance().printGUI("Clean Sweep cleaning cycle is Complete"); //return to original charging station, wait for new instructions
+			break;
+		}
 	}
 	
+	public ControlSystemImpl(){
+		lastChargingStation = map.getVisitedTiles().get(0);
+		nearestChargingStation = map.getVisitedTiles().get(0);
+	}
 	
-	/**
-	 * Method used to provide logic of ControlSystemImpl.  Will serve as main function for ControlSystemImpl.
-	 * 
-	 */
-	public void cleanUp() 
-	{ 
-		holderCheck();
-		getDirtHolder();
+	public boolean maintainCleanCycle() {
 		
-			while (tileDirt >= 0 && dirtHolder < 50)  {
-			removeDirt();
-		}	
-		Reporter.getInstance().printGUI("There is no dirt to clean or dirt holder is full!");
+		if (map.getOpenTiles().size() <= 0 && vacuum.returnToChargerCheck() == false && Battery.getCharge() > 0) {
+			cycleComplete = true;
+			totalCycles ++;
 		}
+		else {
+			cycleComplete = false;
+		}
+		
+		return cycleComplete;
+		
+	}
 	
+	public void allLocVisited() { // bring over from DirtSensor
+		
+	}
+	
+	public boolean dirtRemaining(Tile tile) {
+		dirtPresent = false;
+		return dirtPresent;
+	}
+	
+	public Tile locateChargeStation(Tile tile) { // look 2 cells in every direction, bool isCS, go to that, if none found go to last CS
+		return tile;
+	}
+	
+	public void run(){
+		Reporter.getInstance().printGUI("CleanSweep is now running!");
+	}
 }

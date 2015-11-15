@@ -10,6 +10,8 @@ public class VacuumImpl implements Vacuum {
 	private static DirtSensor dirtSensor;
 	private Tile tile;
 	private int tileDirt;
+	private Tile lastTileVisited;
+	private boolean returnedToCharger;
 	
 	/**
 	 * Constructor for VacuumImpl.  Passes DirtSensor instance as parameter,
@@ -19,6 +21,7 @@ public class VacuumImpl implements Vacuum {
 	{
 		dirtHolder = 0;
 		holderFull = false;
+		returnedToCharger = false;
 		
 	}
 	
@@ -56,8 +59,20 @@ public class VacuumImpl implements Vacuum {
 		return holderFull;
 	}
 	
+	public boolean returnToChargerCheck(){
+		if (dirtHolder > 50) {
+			returnedToCharger = true;
+		}
+		else {
+			returnedToCharger = false;
+		}
+		
+		return returnedToCharger;
+		
+	}
+	
 	public int setTileDirt() {
-		tileDirt = dirtSensor.detectDirt(tile);
+		tileDirt = dirtSensor.detectDirt();
 		return tileDirt;
 	}
 	

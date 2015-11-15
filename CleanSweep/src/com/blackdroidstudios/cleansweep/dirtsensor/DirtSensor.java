@@ -38,18 +38,9 @@ public class DirtSensor implements DirtSensorInter  {
 	//	dirtyTiles.add(com.blackdroidstudios.cleansweep.map.FloorGenerator.generateEmptyMap());  // Not sure what I want to do here
 	}
 
-	/**
-	 * Method used to check if dirt is contained on a tile. Updates private variable dirtDetected with
-	 * how many units of dirt are found. 
-	 */
-	public int detectDirt() {
-		dirtDetected = currentTile.getDirt();
-		return dirtDetected;
-	}
 	
-	public int detectDirt(Tile _tile)
+	public int detectDirt()
 	{
-		currentTile = _tile;
 		
 		dirtDetected = currentTile.getDirt();
 		
