@@ -12,7 +12,7 @@ public class Main
 	
 	public static void main(String[] args) throws Exception
 	{
-		ErrorReporting.GetInstance().WriteError("Test error reporting by neha.");
+		//ErrorReporting.GetInstance().WriteError("Test error reporting by neha.");
 		
 		floorGen = new FloorGenerator();
 		Tile[][] newMap = floorGen.generateMap();
